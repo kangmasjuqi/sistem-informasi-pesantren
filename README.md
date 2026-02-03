@@ -152,6 +152,12 @@ Saat ini sistem berada pada tahap:
 
 ---
 
+## App Status
+
+**NEED FURTHER IMPLEMENTATIONS**
+
+---
+
 ## Kontak
 
 marjuqi[dot]rahmat[at]gmail[dot]com
