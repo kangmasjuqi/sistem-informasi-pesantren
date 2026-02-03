@@ -188,7 +188,7 @@ class StatsController extends Controller
     private function getAcademicPerformance()
     {
         // Get current semester
-        $currentSemester = DB::table('semester')->where('is_active', 0)->first();
+        $currentSemester = DB::table('semester')->where('is_active', 1)->first();
         
         if (!$currentSemester) {
             return null;
