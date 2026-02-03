@@ -16,6 +16,8 @@ Aplikasi ini menyediakan **dashboard personal santri** dan **dashboard statistik
 
 <img width="1354" height="758" alt="Screenshot 2026-02-03 at 09 33 46" src="https://github.com/user-attachments/assets/5d0a9ec9-e7e1-4e05-a9e1-a451359712f4" />
 <img width="1351" height="693" alt="Screenshot 2026-02-03 at 09 34 07" src="https://github.com/user-attachments/assets/d81f4cc5-1b17-434f-aaf5-3484a17d8d6c" />
+<img width="1690" height="877" alt="Screenshot 2026-02-03 at 16 10 39" src="https://github.com/user-attachments/assets/b7a42916-0a19-4e4d-a527-6189c1cc75f4" />
+<img width="1379" height="823" alt="Screenshot 2026-02-03 at 16 13 48" src="https://github.com/user-attachments/assets/5da57c4f-ee2d-4f25-946b-9fbd7b593cf8" />
 
 
 Video demo sistem dapat dilihat di:
