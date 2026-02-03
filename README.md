@@ -6,6 +6,20 @@ Aplikasi ini menyediakan **dashboard personal santri** dan **dashboard statistik
 
 ---
 
+## Role
+
+<img width="517" height="214" alt="Screenshot 2026-02-03 at 09 17 53" src="https://github.com/user-attachments/assets/5c45ed21-e351-47fd-a120-b95ec65cd7e3" />
+
+---
+
+## 📌 Demo
+
+Video demo sistem dapat dilihat di:
+
+https://www.awesomescreenshot.com/video/49016773?key=4144f6b0e1477398e689fb666e630acf
+
+---
+
 ## ✨ Fitur Utama
 
 ### 1. Dashboard Santri (Personal Dashboard)
@@ -119,14 +133,6 @@ Sistem ini dikembangkan untuk:
 - Meningkatkan transparansi data
 - Mendukung digitalisasi pesantren
 - Mempermudah monitoring santri
-
----
-
-## 📌 Demo
-
-Video demo sistem dapat dilihat di:
-
-https://www.awesomescreenshot.com/video/49016773?key=4144f6b0e1477398e689fb666e630acf
 
 ---
 
