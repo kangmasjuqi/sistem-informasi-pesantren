@@ -142,17 +142,7 @@ Sistem ini dikembangkan untuk:
 
 ## 🛠️ Status Pengembangan
 
-Saat ini sistem berada pada tahap:
-
-- ✅ Core management module
-- ✅ Dashboard santri
-- ✅ Statistik dashboard
-- ✅ Akademik & pembayaran
-- 🚧 Pengembangan lanjutan (reporting, export, automation)
-
----
-
-## App Status
+**FOR DEMO PURPOSE**
 
 **NEED FURTHER IMPLEMENTATIONS**
 
