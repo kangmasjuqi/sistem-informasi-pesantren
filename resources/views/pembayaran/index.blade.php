@@ -866,7 +866,7 @@ $(document).ready(function() {
                 }
             ],
             order: [[1, 'desc']],
-            pageLength: 25,
+            pageLength: 10,
             language: {
                 processing: "Memuat data...",
                 search: "Cari:",
