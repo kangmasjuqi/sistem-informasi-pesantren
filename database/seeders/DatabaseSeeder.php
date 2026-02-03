@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('');
 
         // // STEP 1: MASTER DATA
-        // $this->command->info('📋 Seeding Master Data...');
-        // $this->call([
+        $this->command->info('📋 Seeding Master Data...');
+        $this->call([
         //     \Database\Seeders\Master\RoleSeeder::class,
         //     \Database\Seeders\Master\UserSeeder::class,
         //     \Database\Seeders\Master\PengajarSeeder::class,
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         //     \Database\Seeders\Master\JenisPembayaranSeeder::class,
         //     \Database\Seeders\Master\KategoriInventarisSeeder::class,
         //     \Database\Seeders\Master\TahunAjaranSeeder::class,
-        // ]);
+        ]);
 
         $this->command->info('');
         $this->command->info('✅ STEP 1 Completed!');
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // \Database\Seeders\Academic\SemesterSeeder::class,
             // \Database\Seeders\Academic\KelasSeeder::class,
-            \Database\Seeders\Academic\KelasSantriSeeder::class,
+            // \Database\Seeders\Academic\KelasSantriSeeder::class,
             // \Database\Seeders\Academic\PenghuniKamarSeeder::class,
             // \Database\Seeders\Academic\PengampuSeeder::class,
             // \Database\Seeders\Academic\JadwalPelajaranSeeder::class,
@@ -71,10 +71,10 @@ class DatabaseSeeder extends Seeder
             // \Database\Seeders\Operational\InventarisSeeder::class,
             // \Database\Seeders\Operational\PerizinanSeeder::class,
             // \Database\Seeders\Operational\PembayaranSeeder::class,
-            \Database\Seeders\Operational\NilaiSeeder::class,
-            \Database\Seeders\Operational\KehadiranSeeder::class,
-            \Database\Seeders\Operational\RaporSeeder::class,
-            \Database\Seeders\Operational\RaporSummarySeeder::class,
+            // \Database\Seeders\Operational\NilaiSeeder::class,
+            // \Database\Seeders\Operational\KehadiranSeeder::class,
+            // \Database\Seeders\Operational\RaporSeeder::class,
+            // \Database\Seeders\Operational\RaporSummarySeeder::class,
         ]);
         $this->command->info('');
         $this->command->info('✅ STEP 3 Completed!');
