@@ -148,6 +148,12 @@ Saat ini sistem berada pada tahap:
 
 ---
 
+## Kontak
+
+marjuqi[dot]rahmat[at]gmail[dot]com
+
+---
+
 ## 📄 Lisensi
 
 Project ini dikembangkan untuk kebutuhan internal pesantren.
