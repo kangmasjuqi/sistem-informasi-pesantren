@@ -1,8 +1,78 @@
 <?php
+/**
+ * Class StatsController
+ *
+ * --------------------------------------------------------------------------
+ * Statistik & Analitik Sistem Informasi Pesantren
+ * --------------------------------------------------------------------------
+ *
+ * Controller ini bertanggung jawab untuk mengelola seluruh fitur statistik
+ * dan visualisasi data dalam Sistem Informasi Pesantren.
+ *
+ * Modul ini digunakan pada halaman Dashboard Statistik untuk membantu
+ * pengelola, admin, dan manajemen dalam memantau kondisi operasional,
+ * akademik, dan administrasi pesantren secara real-time.
+ *
+ * --------------------------------------------------------------------------
+ * RUANG LINGKUP DATA
+ * --------------------------------------------------------------------------
+ * Controller ini mengolah data dari berbagai modul utama, antara lain:
+ *
+ * - Data Santri (jumlah, status, gender, distribusi)
+ * - Data Kehadiran (hadir, izin, sakit, alpa)
+ * - Data Akademik (nilai, performa, peringkat)
+ * - Data Pembayaran (lunas, tunggakan, rekap)
+ * - Data Kamar & Hunian
+ * - Data Santri Baru per Periode
+ *
+ * --------------------------------------------------------------------------
+ * FUNGSI UTAMA
+ * --------------------------------------------------------------------------
+ * - Menyediakan data agregasi untuk dashboard statistik
+ * - Menghasilkan dataset untuk grafik (Chart.js)
+ * - Menyusun laporan ringkas berbasis periode
+ * - Menyaring data berdasarkan tahun ajaran / semester / kelas
+ * - Menyediakan endpoint statistik internal
+ *
+ * --------------------------------------------------------------------------
+ * POLA PENGGUNAAN
+ * --------------------------------------------------------------------------
+ * Controller ini diakses melalui:
+ *
+ * - Dashboard Admin
+ * - Dashboard Manajemen
+ * - Modul Analitik
+ *
+ * Dan terintegrasi langsung dengan Blade View untuk visualisasi data.
+ *
+ * --------------------------------------------------------------------------
+ * KEAMANAN & AKSES
+ * --------------------------------------------------------------------------
+ * - Hanya dapat diakses oleh role: Admin / Pengelola / Staff Akademik
+ * - Menggunakan middleware auth dan role-based authorization
+ * - Data sensitif difilter sebelum ditampilkan
+ *
+ * --------------------------------------------------------------------------
+ * PERFORMA & OPTIMISASI
+ * --------------------------------------------------------------------------
+ * - Menggunakan query agregasi (SUM, COUNT, GROUP BY)
+ * - Mendukung indexing pada kolom utama
+ * - Menghindari N+1 Query
+ * - Siap dikembangkan dengan caching (Redis/File Cache)
+ *
+ * --------------------------------------------------------------------------
+ * CATATAN PENGEMBANGAN
+ * --------------------------------------------------------------------------
+ * - Gunakan DB::raw secara selektif
+ * - Prioritaskan Query Builder / Eloquent
+ * - Pisahkan query kompleks ke Service Layer bila diperlukan
+ * - Pastikan setiap metode memiliki dokumentasi tambahan
+ *
+ * --------------------------------------------------------------------------
+ */
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class StatsController extends Controller
