@@ -1,0 +1,56 @@
+services:
+  # PHP-FPM + Laravel Application
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: pesantren_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - pesantren_network
+    depends_on:
+      - db
+
+  # Nginx Web Server
+  nginx:
+    image: nginx:alpine
+    container_name: pesantren_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - pesantren_network
+    depends_on:
+      - app
+
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: pesantren_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: pesantren_db
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: pesantren_user
+      MYSQL_PASSWORD: pesantren_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - pesantren_network
+
+networks:
+  pesantren_network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
