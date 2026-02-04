@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\SantriController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +35,8 @@ Route::get('/', function () {
 */
 
 Route::middleware(['auth', 'role'])->group(function () {
-    
-    // Dashboard (All authenticated users)
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,STAFF_TU'])->group(function () {
         Route::get('/stats/santri', [StatsController::class, 'santri'])->name('stats.santri');

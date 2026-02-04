@@ -38,7 +38,7 @@
             </svg>
         </div>
         <div class="stat-content">
-            <div class="stat-value">{{ rand(150, 300) }}</div>
+            <div class="stat-value">{{ number_format($totalSantri, 0, ',', '.') }}</div>
             <div class="stat-label">Total Santri</div>
         </div>
     </div>
@@ -50,7 +50,7 @@
             </svg>
         </div>
         <div class="stat-content">
-            <div class="stat-value">{{ rand(120, 200) }}</div>
+            <div class="stat-value">{{ number_format($santriAktif, 0, ',', '.') }}</div>
             <div class="stat-label">Santri Aktif</div>
         </div>
     </div>
@@ -62,7 +62,7 @@
             </svg>
         </div>
         <div class="stat-content">
-            <div class="stat-value">Rp {{ number_format(rand(50, 150) * 1000000, 0, ',', '.') }}</div>
+            <div class="stat-value">Rp {{ number_format($pembayaranBulanIni, 0, ',', '.') }}</div>
             <div class="stat-label">Pembayaran Bulan Ini</div>
         </div>
     </div>
@@ -74,7 +74,7 @@
             </svg>
         </div>
         <div class="stat-content">
-            <div class="stat-value">{{ rand(15, 30) }}</div>
+            <div class="stat-value">{{ number_format($kelasAktif, 0, ',', '.') }}</div>
             <div class="stat-label">Kelas Aktif</div>
         </div>
     </div>
@@ -84,28 +84,34 @@
 <div class="quick-actions">
     <h3 class="section-title">Menu Cepat</h3>
     <div class="actions-grid">
+        @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'BENDAHARA', 'STAFF_TU', 'KEPSEK']))
         <a href="{{ route('pembayaran.index') }}" class="action-card">
             <div class="action-icon">💰</div>
             <div class="action-title">Pembayaran</div>
             <div class="action-desc">Kelola pembayaran santri</div>
         </a>
+        @endif
 
+        @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'KEPSEK', 'STAFF_TU']))
         <a href="{{ route('stats.santri') }}" class="action-card">
             <div class="action-icon">📊</div>
             <div class="action-title">Statistik</div>
             <div class="action-desc">Lihat statistik santri</div>
         </a>
+        @endif
+
+        @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN']))
+        <a href="{{ route('users.index') }}" class="action-card">
+            <div class="action-icon">👥</div>
+            <div class="action-title">User Management</div>
+            <div class="action-desc">Kelola pengguna sistem</div>
+        </a>
+        @endif
 
         <a href="#" class="action-card">
             <div class="action-icon">📚</div>
             <div class="action-title">Akademik</div>
             <div class="action-desc">Kelola data akademik</div>
-        </a>
-
-        <a href="#" class="action-card">
-            <div class="action-icon">👥</div>
-            <div class="action-title">Santri</div>
-            <div class="action-desc">Kelola data santri</div>
         </a>
     </div>
 </div>
