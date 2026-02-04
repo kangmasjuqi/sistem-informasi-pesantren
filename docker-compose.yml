@@ -47,6 +47,24 @@ services:
     networks:
       - pesantren_network
 
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pesantren_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: pesantren_user
+      PMA_PASSWORD: pesantren_pass
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8081:80"
+    networks:
+      - pesantren_network
+    depends_on:
+      - db
+
 networks:
   pesantren_network:
     driver: bridge
