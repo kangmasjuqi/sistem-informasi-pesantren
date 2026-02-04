@@ -39,20 +39,9 @@ Route::middleware(['auth', 'role'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Stats Routes (Admin, Kepsek, Staff TU)
-    |--------------------------------------------------------------------------
-    */
     Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,STAFF_TU'])->group(function () {
         Route::get('/stats/santri', [StatsController::class, 'santri'])->name('stats.santri');
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Santri Routes
-    |--------------------------------------------------------------------------
-    */
     
     // Santri Dashboard (Only Santri)
     Route::middleware(['role:SANTRI'])->group(function () {
@@ -66,11 +55,23 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/santri/{id}', [SantriController::class, 'show'])->name('santri.show');
     });
 
-    /*
-    |--------------------------------------------------------------------------
-    | Pembayaran Routes (Admin, Bendahara, Staff TU)
-    |--------------------------------------------------------------------------
-    */
+    Route::middleware(['role:WALI'])->group(function () {
+        Route::get('/wali/dashboard', function () {
+            return view('wali.dashboard');
+        })->name('wali.dashboard');
+    });
+    
+    Route::middleware(['role:SUPERADMIN,ADMIN'])->group(function () {
+        // User Management
+        Route::get('/users', function () {
+            return view('users.index');
+        })->name('users.index');
+
+        // Role Management
+        Route::get('/roles', function () {
+            return view('roles.index');
+        })->name('roles.index');
+    });
     
     Route::prefix('pembayaran')->name('pembayaran.')->group(function () {
         
@@ -92,33 +93,4 @@ Route::middleware(['auth', 'role'])->group(function () {
         });
     });
 
-    /*
-    |--------------------------------------------------------------------------
-    | Wali Santri Routes
-    |--------------------------------------------------------------------------
-    */
-    
-    Route::middleware(['role:WALI'])->group(function () {
-        Route::get('/wali/dashboard', function () {
-            return view('wali.dashboard');
-        })->name('wali.dashboard');
-    });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Admin Only Routes
-    |--------------------------------------------------------------------------
-    */
-    
-    Route::middleware(['role:SUPERADMIN,ADMIN'])->group(function () {
-        // User Management
-        Route::get('/users', function () {
-            return view('users.index');
-        })->name('users.index');
-
-        // Role Management
-        Route::get('/roles', function () {
-            return view('roles.index');
-        })->name('roles.index');
-    });
 });
