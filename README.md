@@ -20,14 +20,15 @@ https://www.awesomescreenshot.com/video/49016773?key=4144f6b0e1477398e689fb666e6
 
 Screenshots:
 
+<img width="3420" height="1778" alt="screencapture-localhost-8080-login-2026-02-04-07_30_02" src="https://github.com/user-attachments/assets/f5e56e05-7db0-409d-ba08-e922f76ddc00" />
+<img width="3420" height="1778" alt="screencapture-localhost-8080-dashboard-2026-02-04-07_27_17" src="https://github.com/user-attachments/assets/825b9470-a08c-41b5-a8e2-68083cfdddaa" />
+<img width="3420" height="1942" alt="screencapture-localhost-8080-santri-dashboard-2026-02-04-07_27_04" src="https://github.com/user-attachments/assets/bedbca98-05bd-4cf9-8d74-4096ea1058fb" />
+<img width="881" height="880" alt="Screenshot 2026-02-04 at 07 29 00 Wali" src="https://github.com/user-attachments/assets/3b6c5469-98c5-4ad2-8c87-eeb9a9fa1c81" />
+
 <img width="1354" height="758" alt="Screenshot 2026-02-03 at 09 33 46" src="https://github.com/user-attachments/assets/5d0a9ec9-e7e1-4e05-a9e1-a451359712f4" />
 <img width="1351" height="693" alt="Screenshot 2026-02-03 at 09 34 07" src="https://github.com/user-attachments/assets/d81f4cc5-1b17-434f-aaf5-3484a17d8d6c" />
 <img width="1690" height="877" alt="Screenshot 2026-02-03 at 16 10 39" src="https://github.com/user-attachments/assets/b7a42916-0a19-4e4d-a527-6189c1cc75f4" />
 <img width="1379" height="823" alt="Screenshot 2026-02-03 at 16 13 48" src="https://github.com/user-attachments/assets/5da57c4f-ee2d-4f25-946b-9fbd7b593cf8" />
-<img width="3420" height="1778" alt="screencapture-localhost-8080-dashboard-2026-02-04-07_27_17" src="https://github.com/user-attachments/assets/825b9470-a08c-41b5-a8e2-68083cfdddaa" />
-<img width="3420" height="1942" alt="screencapture-localhost-8080-santri-dashboard-2026-02-04-07_27_04" src="https://github.com/user-attachments/assets/bedbca98-05bd-4cf9-8d74-4096ea1058fb" />
-<img width="881" height="880" alt="Screenshot 2026-02-04 at 07 29 00" src="https://github.com/user-attachments/assets/3b6c5469-98c5-4ad2-8c87-eeb9a9fa1c81" />
-<img width="3420" height="1778" alt="screencapture-localhost-8080-login-2026-02-04-07_30_02" src="https://github.com/user-attachments/assets/f5e56e05-7db0-409d-ba08-e922f76ddc00" />
 
 ---
 
