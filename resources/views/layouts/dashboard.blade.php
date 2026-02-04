@@ -539,24 +539,66 @@
             <nav class="sidebar-nav">
                 <div class="nav-section">
                     <div class="nav-section-title">Menu</div>
-                    <a href="{{ route('santri.show', 123) }}" class="nav-link {{ request()->routeIs('santri.show') ? 'active' : '' }}">
+                    
+                    {{-- Dashboard - All Roles --}}
+                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'KEPSEK', 'PENGAJAR', 'WALIKELAS', 'STAFF_TU', 'BENDAHARA']))
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                         </svg>
-                        <span>Profil Santri</span>
+                        <span>Dashboard</span>
                     </a>
+                    @endif
+
+                    {{-- Santri Dashboard - For Santri Only --}}
+                    @if(auth()->user()->hasRole('SANTRI'))
+                    <a href="{{ route('santri.dashboard') }}" class="nav-link {{ request()->routeIs('santri.dashboard') ? 'active' : '' }}">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    @endif
+
+                    {{-- Wali Dashboard - For Wali Santri Only --}}
+                    @if(auth()->user()->hasRole('WALI'))
+                    <a href="{{ route('wali.dashboard') }}" class="nav-link {{ request()->routeIs('wali.dashboard') ? 'active' : '' }}">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    @endif
+
+                    {{-- Statistik Santri - Admin, Kepsek, Staff TU --}}
+                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'KEPSEK', 'STAFF_TU']))
                     <a href="{{ route('stats.santri') }}" class="nav-link {{ request()->routeIs('stats.santri') ? 'active' : '' }}">
                         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
-                        <span>Statistik</span>
+                        <span>Statistik Santri</span>
                     </a>
+                    @endif
+
+                    {{-- Pembayaran - Admin, Bendahara, Staff TU, Kepsek --}}
+                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'BENDAHARA', 'STAFF_TU', 'KEPSEK']))
                     <a href="{{ route('pembayaran.index') }}" class="nav-link {{ request()->routeIs('pembayaran.*') ? 'active' : '' }}">
                         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 003 3h2a2 2 0 012 2v2m0 0H7m6 0a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2m0 0h14"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
                         </svg>
                         <span>Pembayaran</span>
                     </a>
+                    @endif
+
+                    {{-- User Management - SuperAdmin & Admin Only --}}
+                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN']))
+                    <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        <span>Manajemen User</span>
+                    </a>
+                    @endif
                 </div>
 
                 <div class="nav-section">
@@ -570,7 +612,44 @@
                             <span>Logout</span>
                         </button>
                     </form>
-                </div>                
+                </div>
+
+                <style>
+                    .nav-link-logout {
+                        background: none;
+                        border: none;
+                        width: 100%;
+                        text-align: left;
+                        cursor: pointer;
+                        font-family: inherit;
+                        font-size: inherit;
+                        transition: all 0.2s;
+                    }
+
+                    .nav-link-logout:hover {
+                        background: rgba(239, 68, 68, 0.1);
+                        color: #dc2626;
+                    }
+
+                    .nav-link-logout:hover .nav-icon {
+                        color: #dc2626;
+                    }
+
+                    .nav-section + .nav-section {
+                        margin-top: 2rem;
+                        padding-top: 2rem;
+                        border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    }
+                </style>
+
+                <script>
+                    // Optional: Add confirmation dialog
+                    document.getElementById('logoutForm')?.addEventListener('submit', function(e) {
+                        if (!confirm('Yakin ingin logout?')) {
+                            e.preventDefault();
+                        }
+                    });
+                </script>         
 
 <!--                
                 <div class="nav-section">
