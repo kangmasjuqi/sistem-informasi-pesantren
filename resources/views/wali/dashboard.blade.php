@@ -192,7 +192,7 @@
 
 <style>
     .wali-header {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        background: linear-gradient(135deg, #1a3a2e 0%, #0f2419 100%);
         border-radius: 16px;
         padding: 2rem;
         margin-bottom: 2rem;
@@ -280,7 +280,7 @@
         width: 60px;
         height: 60px;
         border-radius: 12px;
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        background: linear-gradient(135deg, #1a3a2e 0%, #0f2419 100%);
         color: white;
         display: flex;
         align-items: center;

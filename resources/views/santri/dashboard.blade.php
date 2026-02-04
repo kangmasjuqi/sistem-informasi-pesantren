@@ -127,7 +127,7 @@
 
 <style>
     .santri-header {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        background: linear-gradient(135deg, #1a3a2e 0%, #0f2419 100%);
         border-radius: 16px;
         padding: 2rem;
         margin-bottom: 2rem;
