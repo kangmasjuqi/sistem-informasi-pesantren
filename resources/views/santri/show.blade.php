@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'Dashboard - ' . $profile->nama_lengkap)
+@section('page-title', 'Profile - ' . $profile->nama_lengkap)
 
 @section('content')
 

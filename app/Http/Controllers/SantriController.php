@@ -20,6 +20,6 @@ class SantriController extends Controller
         // Add payment summary
         $data['pembayaran_summary'] = Santri::getPembayaranSummary($id);
 
-        return view('santri.dashboard', $data);
+        return view('santri.show', $data);
     }
 }

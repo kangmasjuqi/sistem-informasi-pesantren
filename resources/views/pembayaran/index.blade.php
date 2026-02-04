@@ -565,10 +565,10 @@
                                 <input type="checkbox" id="selectAll">
                             </div>
                         </th>
+                        <th>Tanggal</th>
                         <th>Kode</th>
                         <th>Santri</th>
                         <th>Jenis Pembayaran</th>
-                        <th>Tanggal</th>
                         <th>Periode</th>
                         <th>Total Bayar</th>
                         <th>Status</th>
@@ -797,6 +797,7 @@ $(document).ready(function() {
                         </div>`;
                     }
                 },
+                { data: 'tanggal_pembayaran' },
                 { data: 'kode_pembayaran' },
                 {
                     data: null,
@@ -823,7 +824,6 @@ $(document).ready(function() {
                         </div>`;
                     }
                 },
-                { data: 'tanggal_pembayaran' },
                 { data: 'bulan_tahun' },
                 {
                     data: 'total_bayar',
