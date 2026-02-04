@@ -532,7 +532,7 @@
             <div class="sidebar-header">
                 <a href="/" class="sidebar-logo">
                     <span class="sidebar-logo-icon">P</span>
-                    <span>Pesantren</span>
+                    <span>SI Pesantren</span>
                 </a>
             </div>
             
