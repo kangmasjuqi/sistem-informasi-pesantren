@@ -66,6 +66,28 @@ class UserSeeder extends Seeder
                 'alamat' => 'Jl. Iman No. 5',
                 'status' => 'aktif',
                 'roles' => ['STAFF_TU']
+            ],
+            [
+                'name' => 'Marjuqi',
+                'nama_lengkap' => 'Marjuqi Wali',
+                'username' => 'marjuqiwali',
+                'email' => 'marjuqiwali@pesantren.id',
+                'password' => Hash::make('password'),
+                'telepon' => '081234567898',
+                'alamat' => 'Jl. Pemijen No. 5',
+                'status' => 'aktif',
+                'roles' => ['WALI']
+            ],
+            [
+                'name' => 'Rahmat',
+                'nama_lengkap' => 'Rahmat Santri',
+                'username' => 'rahmatsantri',
+                'email' => 'rahmatsantri@pesantren.id',
+                'password' => Hash::make('password'),
+                'telepon' => '081234567898',
+                'alamat' => 'Jl. Pemijen No. 4',
+                'status' => 'aktif',
+                'roles' => ['SANTRI']
             ]
         ];
 
