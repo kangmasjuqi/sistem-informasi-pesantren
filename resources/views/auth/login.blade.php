@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Login - Sistem Pesantren</title>
+    <title>Sistem Informasi Pesantren - Login</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -378,7 +378,7 @@
                 <div class="logo-container">
                     <div class="logo">☪</div>
                 </div>
-                <h1 class="login-title">Sistem Pesantren</h1>
+                <h1 class="login-title">Sistem Informasi Pesantren</h1>
                 <p class="login-subtitle">Silakan masuk untuk melanjutkan</p>
             </div>
 
