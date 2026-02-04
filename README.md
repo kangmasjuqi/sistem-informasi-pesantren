@@ -2,8 +2,6 @@
 
 Sistem Informasi Pesantren adalah aplikasi berbasis web yang dibangun menggunakan **Laravel (Monolith) + Blade + MySQL** untuk membantu pengelolaan data santri, akademik, kehadiran, pembayaran, dan administrasi pesantren secara terintegrasi.
 
-Aplikasi ini menyediakan **dashboard personal santri** dan **dashboard statistik manajemen** untuk mendukung monitoring dan pengambilan keputusan.
-
 ---
 
 ## Role
@@ -36,68 +34,6 @@ Screenshots:
 
 ---
 
-## ✨ Fitur Utama
-
-### 1. Dashboard Santri (Personal Dashboard)
-
-Setiap santri memiliki halaman dashboard pribadi yang menampilkan informasi utama, seperti:
-
-- Identitas Santri (Nama, NIS, NISN, Jenis Kelamin)
-- Status Keaktifan
-- Profil Ringkas
-- Navigasi Modul:
-  - Profil
-  - Kelas
-  - Kamar
-  - Kehadiran
-  - Nilai
-  - Rapor
-  - Pembayaran
-  - Perizinan
-
-Dashboard ini membantu santri dan wali untuk memantau perkembangan akademik dan administrasi secara mandiri.
-
----
-
-### 2. Dashboard Statistik (Manajemen)
-
-Dashboard Statistik digunakan oleh admin/pengelola pesantren untuk melihat kondisi keseluruhan sistem melalui data visual dan ringkasan.
-
-Menu utama statistik meliputi:
-
-- Statistik Umum
-- Kehadiran Santri
-- Akademik
-- Pembayaran
-- Distribusi Status
-- Kamar
-- Santri Baru
-
-Fitur ini mendukung monitoring operasional pesantren secara real-time dan berbasis data.
-
----
-
-### 3. Manajemen Data Inti
-
-Sistem mendukung pengelolaan data utama pesantren, termasuk:
-
-- Santri
-- Pengajar
-- Kelas
-- Kamar & Penghuni
-- Gedung
-- Pelajaran
-- Tahun Ajaran
-- Kehadiran
-- Nilai & Rapor
-- Pembayaran (Syahriyah)
-- Perizinan
-- Inventaris
-
-Semua data terintegrasi dalam satu sistem terpusat.
-
----
-
 ## 🏗️ Arsitektur Sistem
 
 - Backend: Laravel (Monolith)
@@ -108,23 +44,6 @@ Semua data terintegrasi dalam satu sistem terpusat.
 - Authorization: Role-based Access (Admin, Pengajar, Santri, etc)
 
 Arsitektur monolith dipilih untuk kemudahan deployment, maintenance, dan pengembangan bertahap.
-
----
-
-## 📊 Konsep Dashboard
-
-### Dashboard Santri
-Digunakan untuk:
-- Monitoring pribadi
-- Transparansi nilai & kehadiran
-- Akses informasi administrasi
-
-### Dashboard Statistik
-Digunakan untuk:
-- Evaluasi kinerja akademik
-- Monitoring pembayaran
-- Analisis distribusi santri
-- Pengambilan keputusan manajemen
 
 ---
 
@@ -153,8 +72,6 @@ Sistem ini dikembangkan untuk:
 ---
 
 ## 🛠️ Status Pengembangan
-
-**FOR DEMO PURPOSE**
 
 **NEED FURTHER IMPLEMENTATIONS**
 
