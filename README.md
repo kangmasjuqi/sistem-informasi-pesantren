@@ -25,8 +25,8 @@ Screenshots:
 <img width="3420" height="1942" alt="screencapture-localhost-8080-santri-dashboard-2026-02-04-07_27_04" src="https://github.com/user-attachments/assets/bedbca98-05bd-4cf9-8d74-4096ea1058fb" />
 <img width="881" height="880" alt="Screenshot 2026-02-04 at 07 29 00 Wali" src="https://github.com/user-attachments/assets/3b6c5469-98c5-4ad2-8c87-eeb9a9fa1c81" />
 
-<img width="3420" height="1778" alt="screencapture-localhost-8080-users-2026-02-04-14_47_19" src="https://github.com/user-attachments/assets/a631cdf1-4b56-49dc-8cd3-a906f2285904" />
-<img width="3420" height="2034" alt="screencapture-localhost-8080-users-2026-02-04-14_47_35" src="https://github.com/user-attachments/assets/e220738b-0a7e-4d59-a229-4a2104886f16" />
+<img width="3420" height="1778" alt="screencapture-localhost-8080-users-2026-02-04-15_06_33" src="https://github.com/user-attachments/assets/1d22cb0f-5dc9-4106-af70-aa089e696414" />
+<img width="3420" height="2034" alt="screencapture-localhost-8080-users-2026-02-04-15_06_50" src="https://github.com/user-attachments/assets/4ab19252-4378-421c-a789-dbdfcb1d4c7f" />
 
 
 <img width="1354" height="758" alt="Screenshot 2026-02-03 at 09 33 46" src="https://github.com/user-attachments/assets/5d0a9ec9-e7e1-4e05-a9e1-a451359712f4" />
