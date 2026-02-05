@@ -30,94 +30,113 @@
 <div class="children-section">
     <h3 class="section-title">👨‍👩‍👧 Putra/Putri Anda</h3>
     
-    <div class="children-grid">
-        <!-- Child 1 -->
-        <div class="child-card">
-            <div class="child-header">
-                <div class="child-avatar">AS</div>
-                <div class="child-info">
-                    <h4 class="child-name">Ahmad Sukri</h4>
-                    <p class="child-class">Kelas X IPA 1 • NIS: 2025001</p>
-                </div>
-                <span class="badge badge-success">AKTIF</span>
-            </div>
-            
-            <div class="child-body">
-                <div class="child-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Kehadiran</div>
-                        <div class="stat-value text-success">95%</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Rata-rata</div>
-                        <div class="stat-value text-primary">85.5</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Ranking</div>
-                        <div class="stat-value text-warning">5 / 30</div>
-                    </div>
-                </div>
-
-                <div class="payment-info">
-                    <div class="payment-row">
-                        <span>SPP Februari 2026</span>
-                        <span class="badge badge-success">LUNAS</span>
-                    </div>
-                    <div class="payment-row">
-                        <span>SPP Maret 2026</span>
-                        <span class="badge badge-danger">BELUM LUNAS</span>
-                    </div>
-                </div>
-
-                <a href="#" class="btn-detail">Lihat Detail →</a>
-            </div>
-        </div>
-
-        <!-- Child 2 -->
-        <div class="child-card">
-            <div class="child-header">
-                <div class="child-avatar">SN</div>
-                <div class="child-info">
-                    <h4 class="child-name">Siti Nurhaliza</h4>
-                    <p class="child-class">Kelas VIII A • NIS: 2025024</p>
-                </div>
-                <span class="badge badge-success">AKTIF</span>
-            </div>
-            
-            <div class="child-body">
-                <div class="child-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Kehadiran</div>
-                        <div class="stat-value text-success">98%</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Rata-rata</div>
-                        <div class="stat-value text-primary">90.2</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Ranking</div>
-                        <div class="stat-value text-warning">2 / 28</div>
-                    </div>
-                </div>
-
-                <div class="payment-info">
-                    <div class="payment-row">
-                        <span>SPP Februari 2026</span>
-                        <span class="badge badge-success">LUNAS</span>
-                    </div>
-                    <div class="payment-row">
-                        <span>SPP Maret 2026</span>
-                        <span class="badge badge-success">LUNAS</span>
-                    </div>
-                </div>
-
-                <a href="#" class="btn-detail">Lihat Detail →</a>
-            </div>
-        </div>
+    @if($childrenData->isEmpty())
+    <div class="alert alert-info">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg>
+        Belum ada data santri yang terhubung dengan akun Anda. Silakan hubungi admin untuk menghubungkan data santri.
     </div>
+    @else
+    <div class="children-grid">
+        @foreach($childrenData as $child)
+        <div class="child-card">
+            <div class="child-header">
+                <div class="child-avatar">{{ $child['avatar'] }}</div>
+                <div class="child-info">
+                    <h4 class="child-name">{{ $child['nama'] }}</h4>
+                    <p class="child-class">{{ $child['kelas'] }} • NIS: {{ $child['nis'] }}</p>
+                </div>
+                @php
+                    $statusBadge = match($child['status']) {
+                        'aktif' => 'badge-success',
+                        'lulus' => 'badge-info',
+                        'cuti' => 'badge-warning',
+                        default => 'badge-danger'
+                    };
+                @endphp
+                <span class="badge {{ $statusBadge }}">{{ strtoupper($child['status']) }}</span>
+            </div>
+            
+            <div class="child-body">
+                <div class="child-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Kehadiran</div>
+                        <div class="stat-value text-success">{{ $child['kehadiran'] }}%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Rata-rata</div>
+                        <div class="stat-value text-primary">
+                            {{ $child['rata_rata'] > 0 ? number_format($child['rata_rata'], 1) : '-' }}
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Ranking</div>
+                        <div class="stat-value text-warning">
+                            @if($child['ranking'] && $child['total_siswa'])
+                                {{ $child['ranking'] }} / {{ $child['total_siswa'] }}
+                            @else
+                                -
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                @php
+                    function paymentBadge($status) {
+                        return match($status) {
+                            'lunas' => ['badge-success', 'LUNAS'],
+                            'cicilan' => ['badge-warning', 'CICILAN'],
+                            default => ['badge-danger', 'BELUM LUNAS'],
+                        };
+                    }
+
+                    [$class1, $text1] = paymentBadge($child['current_month_payment']['status']);
+                    [$class2, $text2] = paymentBadge($child['next_month_payment']['status']);
+                @endphp
+
+                <div class="payment-info">
+
+                    <div class="payment-row">
+                        <span>SPP {{ $child['current_month_payment']['month'] }}</span>
+                        <span class="badge {{ $class1 }}">{{ $text1 }}</span>
+                    </div>
+
+                    <div class="payment-row">
+                        <span>SPP {{ $child['next_month_payment']['month'] }}</span>
+                        <span class="badge {{ $class2 }}">{{ $text2 }}</span>
+                    </div>
+
+                </div>
+
+                <a href="{{ route('santri.show', $child['id']) }}" class="btn-detail">Lihat Detail →</a>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    @endif
 </div>
 
-<!-- Quick Actions -->
+<style>
+    .alert {
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        background: #dbeafe;
+        color: #1e40af;
+        border: 1px solid #93c5fd;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .badge-info {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+</style>
+
+<!-- Quick Actions
 <div class="quick-access">
     <h3 class="section-title">📋 Akses Cepat</h3>
     
@@ -155,8 +174,8 @@
         </a>
     </div>
 </div>
-
-<!-- Notifications -->
+ -->
+<!-- Notifications 
 <div class="notifications-section">
     <h3 class="section-title">🔔 Pemberitahuan Terbaru</h3>
     
@@ -189,6 +208,7 @@
         </div>
     </div>
 </div>
+-->
 
 <style>
     .wali-header {

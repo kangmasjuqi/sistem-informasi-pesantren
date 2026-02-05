@@ -7,6 +7,7 @@ use App\Http\Controllers\StatsController;
 use App\Http\Controllers\SantriController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WaliDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +51,12 @@ Route::middleware(['auth', 'role'])->group(function () {
     });
 
     // View Santri Profile (All staff can view)
-    Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS,STAFF_TU,BENDAHARA'])->group(function () {
+    Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS,STAFF_TU,BENDAHARA,WALI,SANTRI'])->group(function () {
         Route::get('/santri/{id}', [SantriController::class, 'show'])->name('santri.show');
     });
 
     Route::middleware(['role:WALI'])->group(function () {
-        Route::get('/wali/dashboard', function () {
-            return view('wali.dashboard');
-        })->name('wali.dashboard');
+        Route::get('/wali/dashboard', [WaliDashboardController::class, 'index'])->name('wali.dashboard');
     });
     
     Route::middleware(['role:SUPERADMIN,ADMIN'])->group(function () {
