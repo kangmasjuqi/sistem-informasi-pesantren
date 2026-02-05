@@ -38,20 +38,21 @@
         <div class="profile-card-body">
             <div class="info-row">
                 <span class="info-label">NIS</span>
-                <span class="info-value">{{ rand(2025001, 2025999) }}</span>
+                <span class="info-value">{{ $profile['nis'] }}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Kelas</span>
-                <span class="info-value">X IPA 1</span>
+                <span class="info-label">NISN</span>
+                <span class="info-value">{{ $profile['nisn'] ?? '-' }}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Kamar</span>
-                <span class="info-value">Asrama Putra Lt. 2 - A12</span>
+                <span class="info-label">Kelas (aktif)</span>
+                <span class="info-value">{{ $kelas }}</span>
             </div>
             <div class="info-row">
-                <span class="info-label">Wali Kelas</span>
-                <span class="info-value">Ustadz Ahmad Zainudin</span>
+                <span class="info-label">Kamar (aktif)</span>
+                <span class="info-value">{{ $kamar }}</span>
             </div>
+            <a href="{{ route('santri.profile') }}" class="btn-link">Lihat Detail Profil →</a>
         </div>
     </div>
 
@@ -63,26 +64,59 @@
             <h3>Status Pembayaran</h3>
         </div>
         <div class="profile-card-body">
+            {{-- Current Month Payment --}}
             <div class="payment-status">
                 <div class="payment-month">
-                    <span class="month-label">SPP Februari 2026</span>
-                    <span class="badge badge-success">LUNAS</span>
+                    <span class="month-label">SPP {{ $payments['current']['month'] }}</span>
+                    @php
+                        $currentBadge = match($payments['current']['status']) {
+                            'lunas' => 'badge-success',
+                            'cicilan' => 'badge-warning',
+                            default => 'badge-danger'
+                        };
+                        $currentText = match($payments['current']['status']) {
+                            'lunas' => 'LUNAS',
+                            'cicilan' => 'CICILAN',
+                            default => 'BELUM LUNAS'
+                        };
+                    @endphp
+                    <span class="badge {{ $currentBadge }}">{{ $currentText }}</span>
                 </div>
-                <div class="payment-amount">Rp 500.000</div>
+                <div class="payment-amount">Rp {{ number_format($payments['current']['amount'], 0, ',', '.') }}</div>
             </div>
+
+            {{-- Next Month Payment --}}
             <div class="payment-status">
                 <div class="payment-month">
-                    <span class="month-label">SPP Maret 2026</span>
-                    <span class="badge badge-warning">BELUM LUNAS</span>
+                    <span class="month-label">SPP {{ $payments['next']['month'] }}</span>
+                    @php
+                        $nextBadge = match($payments['next']['status']) {
+                            'lunas' => 'badge-success',
+                            'cicilan' => 'badge-warning',
+                            default => 'badge-danger'
+                        };
+                        $nextText = match($payments['next']['status']) {
+                            'lunas' => 'LUNAS',
+                            'cicilan' => 'CICILAN',
+                            default => 'BELUM LUNAS'
+                        };
+                    @endphp
+                    <span class="badge {{ $nextBadge }}">{{ $nextText }}</span>
                 </div>
-                <div class="payment-amount">Rp 500.000</div>
+                <div class="payment-amount">Rp {{ number_format($payments['next']['amount'], 0, ',', '.') }}</div>
             </div>
-            <a href="#" class="btn-link">Lihat Riwayat Pembayaran →</a>
         </div>
     </div>
 </div>
 
-<!-- Activity Cards -->
+<style>
+    .badge-danger {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+</style>
+
+<!-- Activity Cards 
 <div class="activity-section">
     <h3 class="section-title">📚 Kegiatan & Pembelajaran</h3>
     
@@ -124,7 +158,7 @@
         </div>
     </div>
 </div>
-
+-->
 <style>
     .santri-header {
         background: linear-gradient(135deg, #1a3a2e 0%, #0f2419 100%);

@@ -7,12 +7,12 @@ use App\Models\Pembayaran;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class WaliDashboardController extends Controller
+class WaliController extends Controller
 {
     /**
      * Display wali dashboard with their children's data
      */
-    public function index()
+    public function dashboard()
     {
         $user = auth()->user();
 
