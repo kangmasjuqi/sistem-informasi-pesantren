@@ -37,7 +37,7 @@ class SantriController extends Controller
         elseif ($user->hasRole('WALI')) {
             // Wali can only view their children
             $isMyChild = DB::table('wali_santri')
-                ->where('wali_id', $user->id)
+                ->where('id', $user->id)
                 ->where('santri_id', $id)
                 ->exists();
             
