@@ -280,41 +280,41 @@ class UserController extends Controller
     /**
      * Remove the specified user
      */
-    public function destroy($id)
-    {
-        try {
-            // Prevent deleting own account
-            if (auth()->id() == $id) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Tidak dapat menghapus akun sendiri'
-                ], 403);
-            }
+    // public function destroy($id)
+    // {
+    //     try {
+    //         // Prevent deleting own account
+    //         if (auth()->id() == $id) {
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'Tidak dapat menghapus akun sendiri'
+    //             ], 403);
+    //         }
 
-            $user = User::findOrFail($id);
+    //         $user = User::findOrFail($id);
             
-            // Check if user is SuperAdmin
-            if ($user->hasRole('SUPERADMIN')) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Tidak dapat menghapus SuperAdmin'
-                ], 403);
-            }
+    //         // Check if user is SuperAdmin
+    //         if ($user->hasRole('SUPERADMIN')) {
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'Tidak dapat menghapus SuperAdmin'
+    //             ], 403);
+    //         }
 
-            $user->delete();
+    //         $user->delete();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'User berhasil dihapus'
-            ]);
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'User berhasil dihapus'
+    //         ]);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
-            ], 500);
-        }
-    }
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
 
     /**
      * Reset user password

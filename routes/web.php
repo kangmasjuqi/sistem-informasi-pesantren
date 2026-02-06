@@ -66,7 +66,7 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::post('/', [UserController::class, 'store'])->name('store');
             Route::get('/{id}', [UserController::class, 'show'])->name('show');
             Route::put('/{id}', [UserController::class, 'update'])->name('update');
-            Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+            // Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
             Route::post('/{id}/reset-password', [UserController::class, 'resetPassword'])->name('reset-password');
         });
 
