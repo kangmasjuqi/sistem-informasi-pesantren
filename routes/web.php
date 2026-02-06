@@ -8,6 +8,7 @@ use App\Http\Controllers\SantriController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WaliController;
+use App\Http\Controllers\MataPelajaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +93,18 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::put('/{id}', [PembayaranController::class, 'update'])->name('update');
             Route::delete('/{id}', [PembayaranController::class, 'destroy'])->name('destroy');
             Route::post('/bulk-destroy', [PembayaranController::class, 'bulkDestroy'])->name('bulk-destroy');
+        });
+    });
+
+    Route::prefix('pelajaran')->name('pelajaran.')->group(function () {
+        
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS'])->group(function () {
+            Route::get('/', [MataPelajaranController::class, 'index'])->name('index');
+            Route::get('/data', [MataPelajaranController::class, 'getData'])->name('data');
+            Route::post('/', [MataPelajaranController::class, 'store'])->name('store');
+            Route::get('/{id}', [MataPelajaranController::class, 'show'])->name('show');
+            Route::put('/{id}', [MataPelajaranController::class, 'update'])->name('update');
+            // Route::delete('/{id}', [MataPelajaranController::class, 'destroy'])->name('destroy');
         });
     });
 
