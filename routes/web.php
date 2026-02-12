@@ -9,6 +9,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WaliController;
 use App\Http\Controllers\MataPelajaranController;
+use App\Http\Controllers\TahunAjaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,18 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::get('/{id}', [MataPelajaranController::class, 'show'])->name('show');
             Route::put('/{id}', [MataPelajaranController::class, 'update'])->name('update');
             // Route::delete('/{id}', [MataPelajaranController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    Route::prefix('tahun-ajaran')->name('tahun-ajaran.')->group(function () {
+        
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS'])->group(function () {
+            Route::get('/', [TahunAjaranController::class, 'index'])->name('index');
+            Route::get('/data', [TahunAjaranController::class, 'getData'])->name('data');
+            Route::post('/', [TahunAjaranController::class, 'store'])->name('store');
+            Route::get('/{id}', [TahunAjaranController::class, 'show'])->name('show');
+            Route::put('/{id}', [TahunAjaranController::class, 'update'])->name('update');
+            Route::delete('/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
         });
     });
 

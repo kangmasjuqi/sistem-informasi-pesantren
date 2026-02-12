@@ -61,6 +61,16 @@
                     </a>
                     @endif
 
+                    {{-- Tahun Ajaran - Admin, Bendahara, Staff TU, Kepsek --}}
+                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'BENDAHARA', 'STAFF_TU', 'KEPSEK']))
+                    <a href="{{ route('tahun-ajaran.index') }}" class="nav-link {{ request()->routeIs('tahun-ajaran.*') ? 'active' : '' }}">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
+                        </svg>
+                        <span>Tahun Ajaran</span>
+                    </a>
+                    @endif
+
                     {{-- User Management - SuperAdmin & Admin Only --}}
                     @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN']))
                     <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
