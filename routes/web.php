@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WaliController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\JenisPembayaranController;
+use App\Http\Controllers\KomponenNilaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,5 +122,30 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::delete('/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
         });
     });
+
+    Route::prefix('jenis-pembayaran')->name('jenis-pembayaran.')->group(function () {
+
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK'])->group(function () {
+            Route::get('/',        [JenisPembayaranController::class, 'index'])->name('index');
+            Route::get('/data',    [JenisPembayaranController::class, 'getData'])->name('data');
+            Route::post('/',       [JenisPembayaranController::class, 'store'])->name('store');
+            Route::get('/{id}',    [JenisPembayaranController::class, 'show'])->name('show');
+            Route::put('/{id}',    [JenisPembayaranController::class, 'update'])->name('update');
+            Route::delete('/{id}', [JenisPembayaranController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    Route::prefix('komponen-nilai')->name('komponen-nilai.')->group(function () {
+
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS'])->group(function () {
+            Route::get('/',        [KomponenNilaiController::class, 'index'])->name('index');
+            Route::get('/data',    [KomponenNilaiController::class, 'getData'])->name('data');
+            Route::post('/',       [KomponenNilaiController::class, 'store'])->name('store');
+            Route::get('/{id}',    [KomponenNilaiController::class, 'show'])->name('show');
+            Route::put('/{id}',    [KomponenNilaiController::class, 'update'])->name('update');
+            Route::delete('/{id}', [KomponenNilaiController::class, 'destroy'])->name('destroy');
+        });
+    });
+
 
 });

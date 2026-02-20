@@ -34,10 +34,40 @@ class JenisPembayaran extends Model
     }
 
     /**
-     * Scope for active jenis pembayaran
+     * Scope for active records
      */
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    /**
+     * Scope filter by kategori
+     */
+    public function scopeKategori($query, string $kategori)
+    {
+        return $query->where('kategori', $kategori);
+    }
+
+    /**
+     * Formatted nominal attribute
+     */
+    public function getNominalFormattedAttribute(): string
+    {
+        return 'Rp ' . number_format($this->nominal, 0, ',', '.');
+    }
+
+    /**
+     * Kategori label map
+     */
+    public static function kategoriLabels(): array
+    {
+        return [
+            'bulanan'     => 'Bulanan',
+            'tahunan'     => 'Tahunan',
+            'pendaftaran' => 'Pendaftaran',
+            'kegiatan'    => 'Kegiatan',
+            'lainnya'     => 'Lainnya',
+        ];
     }
 }
