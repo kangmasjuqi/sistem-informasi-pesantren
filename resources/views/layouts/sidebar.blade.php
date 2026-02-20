@@ -8,110 +8,97 @@
             </div>
             
             <nav class="sidebar-nav">
-                <div class="nav-section">
-                    <div class="nav-section-title">Menu</div>
-                    
-                    {{-- Dashboard - All Roles --}}
-                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'KEPSEK', 'PENGAJAR', 'WALIKELAS', 'STAFF_TU', 'BENDAHARA']))
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                        </svg>
-                        <span>Dashboard</span>
-                    </a>
-                    @endif
 
-                    {{-- Santri Dashboard - For Santri Only --}}
-                    @if(auth()->user()->hasRole('SANTRI'))
-                    <a href="{{ route('santri.dashboard') }}" class="nav-link {{ request()->routeIs('santri.dashboard') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                        </svg>
-                        <span>Dashboard</span>
-                    </a>
-                    @endif
+{{-- ================= AKADEMIK ================= --}}
+<div class="nav-section">
+    <div class="nav-section-title">Akademik</div>
 
-                    {{-- Wali Dashboard - For Wali Santri Only --}}
-                    @if(auth()->user()->hasRole('WALI'))
-                    <a href="{{ route('wali.dashboard') }}" class="nav-link {{ request()->routeIs('wali.dashboard') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                        </svg>
-                        <span>Dashboard</span>
-                    </a>
-                    @endif
+    {{-- Dashboard --}}
+    @if(auth()->user()->hasRole(['SUPERADMIN','ADMIN','KEPSEK','PENGAJAR','WALIKELAS','STAFF_TU','BENDAHARA']))
+    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+        @include('partials.icon-home')
+        <span>Dashboard</span>
+    </a>
+    @endif
 
-                    {{-- Statistik Santri - Admin, Kepsek, Staff TU --}}
-                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'KEPSEK', 'STAFF_TU']))
-                    <a href="{{ route('stats.santri') }}" class="nav-link {{ request()->routeIs('stats.santri') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                        <span>Statistik Santri</span>
-                    </a>
-                    @endif
+    @if(auth()->user()->hasRole('SANTRI'))
+    <a href="{{ route('santri.dashboard') }}" class="nav-link {{ request()->routeIs('santri.dashboard') ? 'active' : '' }}">
+        @include('partials.icon-home')
+        <span>Dashboard</span>
+    </a>
+    @endif
 
-                    {{-- Pembayaran - Admin, Bendahara, Staff TU, Kepsek --}}
-                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'BENDAHARA', 'STAFF_TU', 'KEPSEK']))
-                    <a href="{{ route('pembayaran.index') }}" class="nav-link {{ request()->routeIs('pembayaran.*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
-                        </svg>
-                        <span>Pembayaran</span>
-                    </a>
-                    @endif
+    @if(auth()->user()->hasRole('WALI'))
+    <a href="{{ route('wali.dashboard') }}" class="nav-link {{ request()->routeIs('wali.dashboard') ? 'active' : '' }}">
+        @include('partials.icon-home')
+        <span>Dashboard</span>
+    </a>
+    @endif
 
-                    {{-- Tahun Ajaran - Admin, Bendahara, Staff TU, Kepsek --}}
-                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN', 'BENDAHARA', 'STAFF_TU', 'KEPSEK']))
-                    <a href="{{ route('tahun-ajaran.index') }}" class="nav-link {{ request()->routeIs('tahun-ajaran.*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
-                        </svg>
-                        <span>Tahun Ajaran</span>
-                    </a>
-                    <a href="{{ route('jenis-pembayaran.index') }}" class="nav-link {{ request()->routeIs('jenis-pembayaran.*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
-                        </svg>
-                        <span>Jenis Pembayaran</span>
-                    </a>
-                    <a href="{{ route('komponen-nilai.index') }}" class="nav-link {{ request()->routeIs('komponen-nilai.*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
-                        </svg>
-                        <span>Komponen Nilai</span>
-                    </a>
-                    <a href="{{ route('kategori-inventaris.index') }}" class="nav-link {{ request()->routeIs('kategori-inventaris.*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
-                        </svg>
-                        <span>Kategori Inventaris</span>
-                    </a>
-                    <a href="{{ route('gedung.index') }}" class="nav-link {{ request()->routeIs('gedung.*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9m0 0h4m-4 0l-4-4"/>
-                        </svg>
-                        <span>Gedung</span>
-                    </a>
-                    @endif
+    {{-- Statistik --}}
+    @if(auth()->user()->hasRole(['SUPERADMIN','ADMIN','KEPSEK','STAFF_TU']))
+    <a href="{{ route('stats.santri') }}" class="nav-link {{ request()->routeIs('stats.santri') ? 'active' : '' }}">
+        @include('partials.icon-chart')
+        <span>Statistik Santri</span>
+    </a>
 
-                    {{-- User Management - SuperAdmin & Admin Only --}}
-                    @if(auth()->user()->hasRole(['SUPERADMIN', 'ADMIN']))
-                    <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                        <span>User</span>
-                    </a>
-                    <a href="/pelajaran" class="nav-link {{ request()->is('pelajaran*') ? 'active' : '' }}">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m-7-3h14"/>
-                        </svg>
-                        <span>Pelajaran</span>
-                    </a>
-                    @endif
-                </div>
+    <a href="{{ route('tahun-ajaran.index') }}" class="nav-link {{ request()->routeIs('tahun-ajaran.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Tahun Ajaran</span>
+    </a>
+
+    @endif
+</div>
+
+{{-- ================= OPERASIONAL ================= --}}
+<div class="nav-section">
+    <div class="nav-section-title">Operasional</div>
+
+    @if(auth()->user()->hasRole(['SUPERADMIN','ADMIN','BENDAHARA','STAFF_TU','KEPSEK']))
+    <a href="{{ route('pembayaran.index') }}" class="nav-link {{ request()->routeIs('pembayaran.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Pembayaran</span>
+    </a>
+    <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+        @include('partials.icon-user')
+        <span>User</span>
+    </a>
+    @endif
+</div>
+
+{{-- ================= MASTER ================= --}}
+<div class="nav-section">
+    <div class="nav-section-title">Master</div>
+
+    @if(auth()->user()->hasRole(['SUPERADMIN','ADMIN']))
+
+    <a href="/pelajaran" class="nav-link {{ request()->is('pelajaran*') ? 'active' : '' }}">
+        @include('partials.icon-book')
+        <span>Pelajaran</span>
+    </a>
+
+    <a href="{{ route('jenis-pembayaran.index') }}" class="nav-link {{ request()->routeIs('jenis-pembayaran.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Jenis Pembayaran</span>
+    </a>
+
+    <a href="{{ route('komponen-nilai.index') }}" class="nav-link {{ request()->routeIs('komponen-nilai.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Komponen Nilai</span>
+    </a>
+
+    <a href="{{ route('kategori-inventaris.index') }}" class="nav-link {{ request()->routeIs('kategori-inventaris.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Kategori Inventaris</span>
+    </a>
+
+    <a href="{{ route('gedung.index') }}" class="nav-link {{ request()->routeIs('gedung.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Gedung</span>
+    </a>
+
+    @endif
+</div>
 
                 <div class="nav-section">
                     <div class="nav-section-title">Akun</div>
