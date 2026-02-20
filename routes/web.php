@@ -12,6 +12,8 @@ use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\KomponenNilaiController;
+use App\Http\Controllers\GedungController;
+use App\Http\Controllers\KategoriInventarisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,5 +149,26 @@ Route::middleware(['auth', 'role'])->group(function () {
         });
     });
 
+    Route::prefix('gedung')->name('gedung.')->group(function () {
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK'])->group(function () {
+            Route::get('/',        [GedungController::class, 'index'])->name('index');
+            Route::get('/data',    [GedungController::class, 'getData'])->name('data');
+            Route::post('/',       [GedungController::class, 'store'])->name('store');
+            Route::get('/{id}',    [GedungController::class, 'show'])->name('show');
+            Route::put('/{id}',    [GedungController::class, 'update'])->name('update');
+            Route::delete('/{id}', [GedungController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    Route::prefix('kategori-inventaris')->name('kategori-inventaris.')->group(function () {
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK'])->group(function () {
+            Route::get('/',        [KategoriInventarisController::class, 'index'])->name('index');
+            Route::get('/data',    [KategoriInventarisController::class, 'getData'])->name('data');
+            Route::post('/',       [KategoriInventarisController::class, 'store'])->name('store');
+            Route::get('/{id}',    [KategoriInventarisController::class, 'show'])->name('show');
+            Route::put('/{id}',    [KategoriInventarisController::class, 'update'])->name('update');
+            Route::delete('/{id}', [KategoriInventarisController::class, 'destroy'])->name('destroy');
+        });
+    });
 
 });
