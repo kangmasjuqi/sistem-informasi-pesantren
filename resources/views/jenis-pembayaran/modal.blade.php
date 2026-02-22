@@ -18,7 +18,7 @@
                                 <span class="badge badge-required">WAJIB</span>
                             </label>
                             <input type="text" class="form-control" id="kode"
-                                   required maxlength="20" placeholder="cth: SPP-BLN"
+                                   required maxlength="20" placeholder="contoh: SPP-BLN"
                                    style="text-transform:uppercase;">
                             <div class="form-text">Kode unik, otomatis uppercase.</div>
                         </div>
@@ -28,7 +28,7 @@
                                 <span class="badge badge-required">WAJIB</span>
                             </label>
                             <input type="text" class="form-control" id="nama"
-                                   required maxlength="100" placeholder="cth: SPP Bulanan">
+                                   required maxlength="100" placeholder="contoh: SPP Bulanan">
                         </div>
                     </div>
 

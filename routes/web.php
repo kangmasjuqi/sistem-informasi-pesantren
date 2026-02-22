@@ -14,6 +14,10 @@ use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\KomponenNilaiController;
 use App\Http\Controllers\GedungController;
 use App\Http\Controllers\KategoriInventarisController;
+use App\Http\Controllers\PerizinanController;
+use App\Http\Controllers\InventarisController;
+use App\Http\Controllers\KamarController;
+use App\Http\Controllers\PenghuniKamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -171,4 +175,55 @@ Route::middleware(['auth', 'role'])->group(function () {
         });
     });
 
+    Route::prefix('perizinan')->name('perizinan.')->group(function () {
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,WALIKELAS'])->group(function () {
+            Route::get('/',              [PerizinanController::class, 'index'])->name('index');
+            Route::get('/data',          [PerizinanController::class, 'getData'])->name('data');
+            Route::post('/',             [PerizinanController::class, 'store'])->name('store');
+            Route::get('/{id}',          [PerizinanController::class, 'show'])->name('show');
+            Route::put('/{id}',          [PerizinanController::class, 'update'])->name('update');
+            Route::delete('/{id}',       [PerizinanController::class, 'destroy'])->name('destroy');
+            Route::get('/search/santri', [PerizinanController::class, 'searchSantri'])->name('search-santri');
+        });
+
+        // Approve/reject — stricter role gate
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK'])->group(function () {
+            Route::post('/{id}/approve', [PerizinanController::class, 'approve'])->name('approve');
+            Route::post('/{id}/selesai', [PerizinanController::class, 'selesai'])->name('selesai');
+        });
+    });
+
+    Route::prefix('inventaris')->name('inventaris.')->group(function () {
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK'])->group(function () {
+            Route::get('/',        [InventarisController::class, 'index'])->name('index');
+            Route::get('/data',    [InventarisController::class, 'getData'])->name('data');
+            Route::post('/',       [InventarisController::class, 'store'])->name('store');
+            Route::get('/{id}',    [InventarisController::class, 'show'])->name('show');
+            Route::put('/{id}',    [InventarisController::class, 'update'])->name('update');
+            Route::delete('/{id}', [InventarisController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    Route::prefix('kamar')->name('kamar.')->group(function () {
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK'])->group(function () {
+            Route::get('/',        [KamarController::class, 'index'])->name('index');
+            Route::get('/data',    [KamarController::class, 'getData'])->name('data');
+            Route::post('/',       [KamarController::class, 'store'])->name('store');
+            Route::get('/{id}',    [KamarController::class, 'show'])->name('show');
+            Route::put('/{id}',    [KamarController::class, 'update'])->name('update');
+            Route::delete('/{id}', [KamarController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    Route::prefix('penghuni-kamar')->name('penghuni-kamar.')->group(function () {
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK'])->group(function () {
+            Route::get('/',        [PenghuniKamarController::class, 'index'])->name('index');
+            Route::get('/data',    [PenghuniKamarController::class, 'getData'])->name('data');
+            Route::post('/',       [PenghuniKamarController::class, 'store'])->name('store');
+            Route::get('/{id}',    [PenghuniKamarController::class, 'show'])->name('show');
+            Route::put('/{id}',    [PenghuniKamarController::class, 'update'])->name('update');
+            Route::delete('/{id}', [PenghuniKamarController::class, 'destroy'])->name('destroy');
+            Route::get('/search/santri', [PenghuniKamarController::class, 'searchSantri'])->name('search-santri');
+        });
+    });
 });

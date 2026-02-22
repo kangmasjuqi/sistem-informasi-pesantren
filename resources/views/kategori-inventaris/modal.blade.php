@@ -17,7 +17,7 @@
                                 Kode <span class="badge badge-required">WAJIB</span>
                             </label>
                             <input type="text" class="form-control" id="kode"
-                                   required maxlength="20" placeholder="cth: FURN"
+                                   required maxlength="20" placeholder="contoh: FURN"
                                    style="text-transform:uppercase;">
                             <div class="form-text">Kode unik, otomatis uppercase.</div>
                         </div>
@@ -26,7 +26,7 @@
                                 Nama Kategori <span class="badge badge-required">WAJIB</span>
                             </label>
                             <input type="text" class="form-control" id="nama"
-                                   required maxlength="100" placeholder="cth: Furnitur">
+                                   required maxlength="100" placeholder="contoh: Furnitur">
                         </div>
                     </div>
 

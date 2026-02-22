@@ -18,7 +18,7 @@
                                 <span class="badge badge-required">WAJIB</span>
                             </label>
                             <input type="text" class="form-control" id="kode"
-                                   required maxlength="20" placeholder="cth: UTS"
+                                   required maxlength="20" placeholder="contoh: UTS"
                                    style="text-transform:uppercase;">
                             <div class="form-text">Kode unik, otomatis uppercase.</div>
                         </div>
@@ -29,7 +29,7 @@
                             </label>
                             <input type="text" class="form-control" id="nama"
                                    required maxlength="100"
-                                   placeholder="cth: Ujian Tengah Semester">
+                                   placeholder="contoh: Ujian Tengah Semester">
                         </div>
                     </div>
 

@@ -27,6 +27,11 @@ class Santri extends Model
         'tanggal_keluar' => 'date',
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'aktif');
+    }
+
     /**
      * Get complete santri profile with all related data
      */

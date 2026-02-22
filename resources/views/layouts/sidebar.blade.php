@@ -59,6 +59,22 @@
         @include('partials.icon-wallet')
         <span>Pembayaran</span>
     </a>
+    <a href="{{ route('perizinan.index') }}" class="nav-link {{ request()->routeIs('perizinan.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Perizinan</span>
+    </a>
+    <a href="{{ route('inventaris.index') }}" class="nav-link {{ request()->routeIs('inventaris.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Inventaris</span>
+    </a>
+    <a href="{{ route('kamar.index') }}" class="nav-link {{ request()->routeIs('kamar.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Kamar</span>
+    </a>
+    <a href="{{ route('penghuni-kamar.index') }}" class="nav-link {{ request()->routeIs('penghuni-kamar.*') ? 'active' : '' }}">
+        @include('partials.icon-wallet')
+        <span>Penghuni Kamar</span>
+    </a>
     <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
         @include('partials.icon-user')
         <span>User</span>

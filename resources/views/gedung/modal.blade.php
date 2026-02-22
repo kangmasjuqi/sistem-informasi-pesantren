@@ -17,7 +17,7 @@
                                 Kode Gedung <span class="badge badge-required">WAJIB</span>
                             </label>
                             <input type="text" class="form-control" id="kode_gedung"
-                                   required maxlength="20" placeholder="cth: GD-A"
+                                   required maxlength="20" placeholder="contoh: GD-A"
                                    style="text-transform:uppercase;">
                             <div class="form-text">Kode unik, otomatis uppercase.</div>
                         </div>
@@ -26,7 +26,7 @@
                                 Nama Gedung <span class="badge badge-required">WAJIB</span>
                             </label>
                             <input type="text" class="form-control" id="nama_gedung"
-                                   required maxlength="255" placeholder="cth: Gedung Asrama A">
+                                   required maxlength="255" placeholder="contoh: Gedung Asrama A">
                         </div>
                     </div>
 
@@ -77,14 +77,14 @@
                                 <span class="badge badge-info">Orang</span>
                             </label>
                             <input type="number" class="form-control" id="kapasitas_total"
-                                   min="1" placeholder="cth: 100">
+                                   min="1" placeholder="contoh: 100">
                         </div>
                         <div>
                             <label class="form-label">
                                 Tahun Dibangun <span class="badge badge-optional">Opsional</span>
                             </label>
                             <input type="number" class="form-control" id="tahun_dibangun"
-                                   min="1900" max="{{ date('Y') }}" placeholder="cth: 2010">
+                                   min="1900" max="{{ date('Y') }}" placeholder="contoh: 2010">
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@
                                 Fasilitas <span class="badge badge-optional">Opsional</span>
                             </label>
                             <input type="text" class="form-control" id="fasilitas"
-                                   placeholder="cth: AC, Proyektor, Toilet, WiFi">
+                                   placeholder="contoh: AC, Proyektor, Toilet, WiFi">
                             <div class="form-text">Pisahkan dengan koma. Disimpan sebagai JSON array.</div>
                         </div>
                     </div>
