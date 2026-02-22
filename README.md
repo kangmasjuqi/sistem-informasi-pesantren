@@ -19,6 +19,7 @@ https://www.awesomescreenshot.com/video/49016773?key=4144f6b0e1477398e689fb666e6
 Screenshots:
 
 <img width="3420" height="1778" alt="screencapture-localhost-8080-login-2026-02-04-07_30_02" src="https://github.com/user-attachments/assets/f5e56e05-7db0-409d-ba08-e922f76ddc00" />
+<img width="1611" height="932" alt="Screenshot 2026-02-22 at 21 02 51-Sidebar" src="https://github.com/user-attachments/assets/b92d4926-03f5-489f-84d7-94e7cb855674" />
 <img width="3420" height="1778" alt="screencapture-localhost-8080-dashboard-2026-02-04-07_27_17" src="https://github.com/user-attachments/assets/825b9470-a08c-41b5-a8e2-68083cfdddaa" />
 <img width="3420" height="1942" alt="screencapture-localhost-8080-santri-dashboard-2026-02-04-07_27_04" src="https://github.com/user-attachments/assets/bedbca98-05bd-4cf9-8d74-4096ea1058fb" />
 <img width="881" height="880" alt="Screenshot 2026-02-04 at 07 29 00 Wali" src="https://github.com/user-attachments/assets/3b6c5469-98c5-4ad2-8c87-eeb9a9fa1c81" />
