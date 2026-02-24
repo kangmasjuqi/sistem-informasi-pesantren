@@ -73,7 +73,7 @@
                         </div>
                         <div>
                             <label class="form-label">
-                                Kapasitas Total <span class="badge badge-optional">Opsional</span>
+                                Kapasitas Total 
                                 <span class="badge badge-info">Orang</span>
                             </label>
                             <input type="number" class="form-control" id="kapasitas_total"
@@ -81,7 +81,7 @@
                         </div>
                         <div>
                             <label class="form-label">
-                                Tahun Dibangun <span class="badge badge-optional">Opsional</span>
+                                Tahun Dibangun 
                             </label>
                             <input type="number" class="form-control" id="tahun_dibangun"
                                    min="1900" max="{{ date('Y') }}" placeholder="contoh: 2010">
@@ -92,7 +92,7 @@
                     <div class="form-row full">
                         <div>
                             <label class="form-label">
-                                Alamat / Lokasi <span class="badge badge-optional">Opsional</span>
+                                Alamat / Lokasi 
                             </label>
                             <textarea class="form-control" id="alamat_lokasi" rows="2"
                                       placeholder="Lokasi gedung dalam area pesantren..."></textarea>
@@ -103,7 +103,7 @@
                     <div class="form-row full">
                         <div>
                             <label class="form-label">
-                                Fasilitas <span class="badge badge-optional">Opsional</span>
+                                Fasilitas 
                             </label>
                             <input type="text" class="form-control" id="fasilitas"
                                    placeholder="contoh: AC, Proyektor, Toilet, WiFi">
@@ -115,7 +115,7 @@
                     <div class="form-row">
                         <div>
                             <label class="form-label">
-                                Keterangan <span class="badge badge-optional">Opsional</span>
+                                Keterangan 
                             </label>
                             <textarea class="form-control" id="keterangan" rows="2"
                                       placeholder="Catatan tambahan tentang gedung..."></textarea>

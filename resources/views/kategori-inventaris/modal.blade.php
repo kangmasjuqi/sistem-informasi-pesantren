@@ -34,7 +34,7 @@
                     <div class="form-row full">
                         <div>
                             <label class="form-label">
-                                Deskripsi <span class="badge badge-optional">Opsional</span>
+                                Deskripsi 
                             </label>
                             <textarea class="form-control" id="deskripsi" rows="3"
                                       placeholder="Deskripsi singkat kategori inventaris..."></textarea>

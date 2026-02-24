@@ -244,7 +244,6 @@
                                 <div>
                                     <label class="form-label">
                                         Keterangan 
-                                        <span class="badge badge-optional">Optional</span>
                                     </label>
                                     <textarea class="form-control" 
                                               id="keterangan" 
@@ -314,7 +313,6 @@
                                     <div>
                                         <label class="form-label">
                                             Keterangan 
-                                            <span class="badge badge-optional">Optional</span>
                                         </label>
                                         <textarea class="form-control" 
                                                   id="semester_ganjil_keterangan" 
@@ -388,7 +386,6 @@
                                     <div>
                                         <label class="form-label">
                                             Keterangan 
-                                            <span class="badge badge-optional">Optional</span>
                                         </label>
                                         <textarea class="form-control" 
                                                   id="semester_genap_keterangan" 

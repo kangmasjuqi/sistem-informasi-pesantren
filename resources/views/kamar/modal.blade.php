@@ -29,7 +29,7 @@
 
                     <div class="form-row">
                         <div>
-                            <label class="form-label">Nama Kamar <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Nama Kamar </label>
                             <input type="text" class="form-control" id="nama_kamar" maxlength="100" placeholder="contoh: Kamar Al-Farabi">
                         </div>
                         <div>
@@ -44,7 +44,7 @@
                             <input type="number" class="form-control" id="kapasitas" required min="1" placeholder="contoh: 8">
                         </div>
                         <div>
-                            <label class="form-label">Luas <span class="badge badge-optional">Opsional</span> <span class="badge badge-info">m²</span></label>
+                            <label class="form-label">Luas  <span class="badge badge-info">m²</span></label>
                             <input type="number" class="form-control" id="luas" min="0" step="0.01" placeholder="contoh: 24.5">
                         </div>
                         <div>
@@ -59,7 +59,7 @@
 
                     <div class="form-row full">
                         <div>
-                            <label class="form-label">Fasilitas <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Fasilitas </label>
                             <input type="text" class="form-control" id="fasilitas" placeholder="contoh: Lemari, Kasur, Kipas Angin, Kamar Mandi">
                             <div class="form-text">Pisahkan dengan koma.</div>
                         </div>
@@ -74,7 +74,7 @@
                             </select>
                         </div>
                         <div>
-                            <label class="form-label">Keterangan <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Keterangan </label>
                             <textarea class="form-control" id="keterangan" rows="2" placeholder="Catatan..."></textarea>
                         </div>
                     </div>

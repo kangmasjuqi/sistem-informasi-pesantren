@@ -42,11 +42,11 @@
                             <input type="date" class="form-control" id="tanggal_selesai" required>
                         </div>
                         <div>
-                            <label class="form-label">Waktu Keluar <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Waktu Keluar </label>
                             <input type="time" class="form-control" id="waktu_keluar">
                         </div>
                         <div>
-                            <label class="form-label">Rencana Kembali <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Rencana Kembali </label>
                             <input type="time" class="form-control" id="waktu_kembali">
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             <textarea class="form-control" id="keperluan" rows="3" required placeholder="Jelaskan keperluan izin..."></textarea>
                         </div>
                         <div>
-                            <label class="form-label">Tujuan / Alamat <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Tujuan / Alamat </label>
                             <textarea class="form-control" id="tujuan" rows="3" placeholder="Alamat tujuan..."></textarea>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                     {{-- Keterangan --}}
                     <div class="form-row full">
                         <div>
-                            <label class="form-label">Keterangan Tambahan <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Keterangan Tambahan </label>
                             <textarea class="form-control" id="keterangan" rows="2" placeholder="Catatan tambahan..."></textarea>
                         </div>
                     </div>

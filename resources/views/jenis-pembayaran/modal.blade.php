@@ -74,7 +74,7 @@
                         <div>
                             <label class="form-label">
                                 Deskripsi
-                                <span class="badge badge-optional">Opsional</span>
+                                
                             </label>
                             <textarea class="form-control" id="deskripsi"
                                       rows="3" placeholder="Deskripsi jenis pembayaran..."></textarea>

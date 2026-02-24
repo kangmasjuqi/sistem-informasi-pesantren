@@ -35,7 +35,7 @@
                             <input type="date" class="form-control" id="tanggal_masuk" required>
                         </div>
                         <div>
-                            <label class="form-label">Tanggal Keluar <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Tanggal Keluar </label>
                             <input type="date" class="form-control" id="tanggal_keluar">
                             <div class="form-text">Kosongkan jika masih aktif.</div>
                         </div>
@@ -51,7 +51,7 @@
 
                     <div class="form-row full">
                         <div>
-                            <label class="form-label">Keterangan <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Keterangan </label>
                             <textarea class="form-control" id="keterangan" rows="2" placeholder="Catatan tambahan..."></textarea>
                         </div>
                     </div>

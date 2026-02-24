@@ -33,7 +33,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="form-label">NIK <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">NIK </label>
                                 <input type="text" class="form-control" id="nik" name="nik" maxlength="20">
                             </div>
                         </div>
@@ -47,11 +47,11 @@
                                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
                             </div>
                             <div>
-                                <label class="form-label">Telepon <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Telepon </label>
                                 <input type="text" class="form-control" id="telepon" name="telepon" placeholder="08xx...">
                             </div>
                             <div>
-                                <label class="form-label">Email <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Email </label>
                                 <input type="email" class="form-control" id="email" name="email">
                             </div>
                         </div>
@@ -70,25 +70,25 @@
                         </div>
                         <div class="form-row" style="grid-template-columns: repeat(4, 1fr);">
                             <div>
-                                <label class="form-label">Pendidikan Terakhir <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Pendidikan Terakhir </label>
                                 <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir" placeholder="S1, S2, D3...">
                             </div>
                             <div>
-                                <label class="form-label">Jurusan <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Jurusan </label>
                                 <input type="text" class="form-control" id="jurusan" name="jurusan">
                             </div>
                             <div>
-                                <label class="form-label">Universitas <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Universitas </label>
                                 <input type="text" class="form-control" id="universitas" name="universitas">
                             </div>
                             <div>
-                                <label class="form-label">Tahun Lulus <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Tahun Lulus </label>
                                 <input type="number" class="form-control" id="tahun_lulus" name="tahun_lulus" min="1970" max="{{ date('Y') }}" placeholder="{{ date('Y') }}">
                             </div>
                         </div>
                         <div class="form-row full">
                             <div>
-                                <label class="form-label">Keahlian <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Keahlian </label>
                                 <input type="text" class="form-control" id="keahlian" name="keahlian" placeholder="Fiqih, Bahasa Arab, Matematika...">
                                 <div class="form-text">Pisahkan dengan koma. Disimpan sebagai JSON array.</div>
                             </div>
@@ -106,7 +106,7 @@
                                 <input type="date" class="form-control" id="tanggal_bergabung" name="tanggal_bergabung" required>
                             </div>
                             <div>
-                                <label class="form-label">Tanggal Keluar <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Tanggal Keluar </label>
                                 <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar">
                                 <div class="form-text">Kosongkan jika masih aktif.</div>
                             </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="form-row full">
                             <div>
-                                <label class="form-label">Keterangan <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Keterangan </label>
                                 <textarea class="form-control" id="keterangan" name="keterangan" rows="2"></textarea>
                             </div>
                         </div>

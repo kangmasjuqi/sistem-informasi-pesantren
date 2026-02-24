@@ -46,7 +46,7 @@
                                 <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required>
                             </div>
                             <div>
-                                <label class="form-label">NIK <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">NIK </label>
                                 <input type="text" class="form-control" id="nik" name="nik" maxlength="20">
                             </div>
                             <div>
@@ -59,19 +59,19 @@
                         </div>
                         <div class="form-row" style="grid-template-columns: repeat(4, 1fr);">
                             <div>
-                                <label class="form-label">Tempat Lahir <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Tempat Lahir </label>
                                 <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir">
                             </div>
                             <div>
-                                <label class="form-label">Tanggal Lahir <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Tanggal Lahir </label>
                                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir">
                             </div>
                             <div>
-                                <label class="form-label">Telepon <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Telepon </label>
                                 <input type="text" class="form-control" id="telepon" name="telepon" placeholder="08xx...">
                             </div>
                             <div>
-                                <label class="form-label">Email <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Email </label>
                                 <input type="email" class="form-control" id="email" name="email">
                             </div>
                         </div>
@@ -84,15 +84,15 @@
                         </div>
                         <div class="form-row" style="grid-template-columns: repeat(3, 1fr);">
                             <div>
-                                <label class="form-label">Pendidikan Terakhir <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Pendidikan Terakhir </label>
                                 <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir" placeholder="SMA, S1, S2...">
                             </div>
                             <div>
-                                <label class="form-label">Pekerjaan <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Pekerjaan </label>
                                 <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="PNS, Wiraswasta...">
                             </div>
                             <div>
-                                <label class="form-label">Penghasilan/Bulan <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Penghasilan/Bulan </label>
                                 <div style="position:relative;">
                                     <span style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:#6b7280;font-size:.875rem;pointer-events:none;">Rp</span>
                                     <input type="text" class="form-control" id="penghasilan" name="penghasilan" style="padding-left:2.25rem;" placeholder="0">
@@ -109,11 +109,11 @@
                         </div>
                         <div class="form-row">
                             <div>
-                                <label class="form-label">Alamat <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Alamat </label>
                                 <textarea class="form-control" id="alamat" name="alamat" rows="2" placeholder="Jika berbeda dengan alamat santri..."></textarea>
                             </div>
                             <div>
-                                <label class="form-label">Keterangan <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Keterangan </label>
                                 <textarea class="form-control" id="keterangan" name="keterangan" rows="2"></textarea>
                             </div>
                         </div>

@@ -22,7 +22,7 @@
                             </select>
                         </div>
                         <div>
-                            <label class="form-label">Gedung / Lokasi <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Gedung / Lokasi </label>
                             <select class="form-select" id="gedung_id" name="gedung_id">
                                 <option value="">Tidak ada / Tidak diketahui</option>
                                 @foreach($gedungs as $g)
@@ -34,7 +34,7 @@
 
                     <div class="form-row">
                         <div>
-                            <label class="form-label">Kode Inventaris <span class="badge badge-optional">Opsional</span> <span class="badge badge-auto">Auto-generate</span></label>
+                            <label class="form-label">Kode Inventaris  <span class="badge badge-auto">Auto-generate</span></label>
                             <input type="text" class="form-control" id="kode_inventaris" name="kode_inventaris" maxlength="30" placeholder="Kosongkan untuk auto-generate">
                         </div>
                         <div>
@@ -45,15 +45,15 @@
 
                     <div class="form-row" style="grid-template-columns: repeat(3, 1fr);">
                         <div>
-                            <label class="form-label">Merk <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Merk </label>
                             <input type="text" class="form-control" id="merk" name="merk" maxlength="100" placeholder="contoh: Brother">
                         </div>
                         <div>
-                            <label class="form-label">Tipe / Model <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Tipe / Model </label>
                             <input type="text" class="form-control" id="tipe_model" name="tipe_model" maxlength="100" placeholder="contoh: DCP-T420W">
                         </div>
                         <div>
-                            <label class="form-label">No. Seri <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">No. Seri </label>
                             <input type="text" class="form-control" id="nomor_seri" name="nomor_seri" maxlength="100" placeholder="Serial number">
                         </div>
                     </div>
@@ -101,14 +101,14 @@
                             <input type="date" class="form-control" id="tanggal_perolehan" name="tanggal_perolehan" required>
                         </div>
                         <div>
-                            <label class="form-label">Harga Perolehan <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Harga Perolehan </label>
                             <div style="position:relative;">
                                 <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:.875rem; font-weight:600; color:#6b7280; pointer-events:none;">Rp</span>
                                 <input type="text" class="form-control" id="harga_perolehan" name="harga_perolehan" placeholder="0" style="padding-left:2.5rem; text-align:right;" inputmode="numeric">
                             </div>
                         </div>
                         <div>
-                            <label class="form-label">Nilai Penyusutan <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Nilai Penyusutan </label>
                             <div style="position:relative;">
                                 <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:.875rem; font-weight:600; color:#6b7280; pointer-events:none;">Rp</span>
                                 <input type="text" class="form-control" id="nilai_penyusutan" name="nilai_penyusutan" placeholder="0" style="padding-left:2.5rem; text-align:right;" inputmode="numeric">
@@ -118,33 +118,33 @@
 
                     <div class="form-row">
                         <div>
-                            <label class="form-label">Sumber Dana <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Sumber Dana </label>
                             <input type="text" class="form-control" id="sumber_dana" name="sumber_dana" maxlength="100" placeholder="contoh: Donasi, APBN, Yayasan">
                         </div>
                         <div>
-                            <label class="form-label">Lokasi Detail <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Lokasi Detail </label>
                             <input type="text" class="form-control" id="lokasi" name="lokasi" maxlength="200" placeholder="contoh: Rak B-3, Gudang Lantai 2">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div>
-                            <label class="form-label">Penanggung Jawab <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Penanggung Jawab </label>
                             <input type="text" class="form-control" id="penanggung_jawab" name="penanggung_jawab" maxlength="100" placeholder="Nama penanggung jawab">
                         </div>
                         <div>
-                            <label class="form-label">Tgl. Maintenance Terakhir <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Tgl. Maintenance Terakhir </label>
                             <input type="date" class="form-control" id="tanggal_maintenance_terakhir" name="tanggal_maintenance_terakhir">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div>
-                            <label class="form-label">Spesifikasi <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Spesifikasi </label>
                             <textarea class="form-control" id="spesifikasi" name="spesifikasi" rows="3" placeholder="Spesifikasi teknis barang..."></textarea>
                         </div>
                         <div>
-                            <label class="form-label">Foto Barang <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Foto Barang </label>
                             <input type="file" class="form-control" id="foto" name="foto" accept="image/jpg,image/jpeg,image/png,image/webp">
                             <div class="form-text">JPG/PNG/WebP, maks. 2MB.</div>
                             <img id="fotoPreview" src="" alt="Preview" style="display:none; margin-top:.75rem; max-height:120px; border-radius:8px; border:1px solid var(--border-color);">
@@ -153,7 +153,7 @@
 
                     <div class="form-row full">
                         <div>
-                            <label class="form-label">Keterangan <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Keterangan </label>
                             <textarea class="form-control" id="keterangan" name="keterangan" rows="2" placeholder="Catatan tambahan..."></textarea>
                         </div>
                     </div>

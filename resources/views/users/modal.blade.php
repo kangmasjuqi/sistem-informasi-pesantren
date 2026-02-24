@@ -75,7 +75,7 @@
                         <div>
                             <label class="form-label">
                                 Telepon
-                                <span class="badge badge-optional">Opsional</span>
+                                
                             </label>
                             <input type="text" class="form-control" id="telepon" name="telepon" placeholder="08xxxxxxxxxx">
                         </div>
@@ -97,7 +97,7 @@
                         <div>
                             <label class="form-label">
                                 Alamat
-                                <span class="badge badge-optional">Opsional</span>
+                                
                             </label>
                             <textarea class="form-control" id="alamat" name="alamat" rows="2" placeholder="Alamat lengkap"></textarea>
                         </div>

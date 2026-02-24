@@ -42,7 +42,7 @@
                         <div>
                             <label class="form-label">
                                 Tahun Ajaran
-                                <span class="badge badge-optional">Opsional</span>
+                                
                             </label>
                             <select class="form-select" id="tahun_ajaran_id" name="tahun_ajaran_id">
                                 <option value="">Pilih Tahun Ajaran...</option>
@@ -108,7 +108,7 @@
                         <div>
                             <label class="form-label">
                                 Potongan/Diskon
-                                <span class="badge badge-optional">Opsional</span>
+                                
                             </label>
                             <input type="number" class="form-control" id="potongan" name="potongan" value="0" step="0.01" min="0">
                         </div>
@@ -118,7 +118,7 @@
                         <div>
                             <label class="form-label">
                                 Denda
-                                <span class="badge badge-optional">Opsional</span>
+                                
                             </label>
                             <input type="number" class="form-control" id="denda" name="denda" value="0" step="0.01" min="0">
                         </div>
@@ -164,7 +164,7 @@
                         <div>
                             <label class="form-label">
                                 Keterangan
-                                <span class="badge badge-optional">Opsional</span>
+                                
                             </label>
                             <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
                         </div>

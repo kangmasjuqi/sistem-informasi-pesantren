@@ -21,7 +21,7 @@
                                 <input type="text" class="form-control" id="nis" name="nis" required style="text-transform:uppercase;" placeholder="Nomor Induk Santri">
                             </div>
                             <div>
-                                <label class="form-label">NISN <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">NISN </label>
                                 <input type="text" class="form-control" id="nisn" name="nisn" placeholder="Nomor Induk Siswa Nasional">
                             </div>
                             <div>
@@ -29,7 +29,7 @@
                                 <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required placeholder="Nama sesuai akta lahir">
                             </div>
                             <div>
-                                <label class="form-label">Nama Panggilan <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Nama Panggilan </label>
                                 <input type="text" class="form-control" id="nama_panggilan" name="nama_panggilan" placeholder="Nama sehari-hari">
                             </div>
                         </div>
@@ -51,13 +51,13 @@
                                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
                             </div>
                             <div>
-                                <label class="form-label">NIK <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">NIK </label>
                                 <input type="text" class="form-control" id="nik" name="nik" placeholder="16 digit" maxlength="20">
                             </div>
                         </div>
                         <div class="form-row" style="grid-template-columns: repeat(4, 1fr);">
                             <div>
-                                <label class="form-label">Golongan Darah <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Golongan Darah </label>
                                 <select class="form-select" id="golongan_darah" name="golongan_darah">
                                     <option value="">Tidak Diketahui</option>
                                     @foreach(['A','B','AB','O','A+','A-','B+','B-','AB+','AB-','O+','O-'] as $gd)
@@ -66,15 +66,15 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="form-label">Telepon <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Telepon </label>
                                 <input type="text" class="form-control" id="telepon" name="telepon" placeholder="08xx...">
                             </div>
                             <div>
-                                <label class="form-label">Anak ke- <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Anak ke- </label>
                                 <input type="number" class="form-control" id="anak_ke" name="anak_ke" min="1" placeholder="1">
                             </div>
                             <div>
-                                <label class="form-label">Jumlah Saudara <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Jumlah Saudara </label>
                                 <input type="number" class="form-control" id="jumlah_saudara" name="jumlah_saudara" min="0" placeholder="0">
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                                 <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" required>
                             </div>
                             <div>
-                                <label class="form-label">Tanggal Keluar <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Tanggal Keluar </label>
                                 <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar">
                                 <div class="form-text">Kosongkan jika masih aktif.</div>
                             </div>
@@ -150,11 +150,11 @@
                         </div>
                         <div class="form-row">
                             <div>
-                                <label class="form-label">Riwayat Penyakit <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Riwayat Penyakit </label>
                                 <textarea class="form-control" id="riwayat_penyakit" name="riwayat_penyakit" rows="2" placeholder="Alergi, kondisi kronis, dll..."></textarea>
                             </div>
                             <div>
-                                <label class="form-label">Keterangan <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Keterangan </label>
                                 <textarea class="form-control" id="keterangan" name="keterangan" rows="2" placeholder="Catatan tambahan..."></textarea>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
                                 </div>
                             </div>
                             <div style="flex:1;">
-                                <label class="form-label">Upload Foto <span class="badge badge-optional">Opsional</span></label>
+                                <label class="form-label">Upload Foto </label>
                                 <input type="file" class="form-control" id="foto" name="foto" accept="image/jpg,image/jpeg,image/png,image/webp">
                                 <div class="form-text">JPG, PNG, WebP. Maks 2MB.</div>
                             </div>

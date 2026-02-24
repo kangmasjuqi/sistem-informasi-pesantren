@@ -32,7 +32,7 @@
 
                     <div class="form-row full">
                         <div>
-                            <label class="form-label">Catatan <span class="badge badge-optional">Opsional</span></label>
+                            <label class="form-label">Catatan </label>
                             <textarea class="form-control" id="catatan_persetujuan" rows="3" placeholder="Catatan persetujuan atau alasan penolakan..."></textarea>
                         </div>
                     </div>
