@@ -256,7 +256,7 @@
                                 </strong>
                             </td>
                             <td>
-                                <a href="{{ route('santri.show', $concern->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
+                                <a href="{{ route('santri.show-detail', $concern->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
                                     Lihat Detail →
                                 </a>
                             </td>
@@ -359,7 +359,7 @@
                             </td>
                             <td class="text-danger">{{ $concern->lowest_grade }}</td>
                             <td>
-                                <a href="{{ route('santri.show', $concern->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
+                                <a href="{{ route('santri.show-detail', $concern->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
                                     Lihat Detail →
                                 </a>
                             </td>
@@ -447,7 +447,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('santri.show', $concern->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
+                                <a href="{{ route('santri.show-detail', $concern->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
                                     Lihat Detail →
                                 </a>
                             </td>
@@ -635,7 +635,7 @@
                             <td>{{ \Carbon\Carbon::parse($santri->tanggal_masuk)->format('d M Y') }}</td>
                             <td>{{ $santri->days_since_admission }} hari</td>
                             <td>
-                                <a href="{{ route('santri.show', $santri->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
+                                <a href="{{ route('santri.show-detail', $santri->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
                                     Lihat Detail →
                                 </a>
                             </td>
@@ -677,7 +677,7 @@
                             <td>{{ \Carbon\Carbon::parse($santri->tanggal_keluar)->format('d M Y') }}</td>
                             <td>{{ number_format($santri->days_enrolled / 365, 1) }} tahun</td>
                             <td>
-                                <a href="{{ route('santri.show', $santri->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
+                                <a href="{{ route('santri.show-detail', $santri->id) }}" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">
                                     Lihat Detail →
                                 </a>
                             </td>
