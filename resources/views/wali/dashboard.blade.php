@@ -110,7 +110,7 @@
 
                 </div>
 
-                <a href="{{ route('santri.show', $child['id']) }}" class="btn-detail">Lihat Detail →</a>
+                <a href="{{ route('santri.show-detail', $child['id']) }}" class="btn-detail">Lihat Detail →</a>
             </div>
         </div>
         @endforeach

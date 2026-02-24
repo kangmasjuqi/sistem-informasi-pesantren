@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Santri extends Model
 {
@@ -22,14 +23,55 @@ class Santri extends Model
     ];
 
     protected $casts = [
-        'tanggal_lahir' => 'date',
-        'tanggal_masuk' => 'date',
+        'tanggal_lahir'  => 'date',
+        'tanggal_masuk'  => 'date',
         'tanggal_keluar' => 'date',
+        'anak_ke'        => 'integer',
+        'jumlah_saudara' => 'integer',
     ];
+
+    // ── Relationships ─────────────────────────────────────────────
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function waliSantri(): HasMany
+    {
+        return $this->hasMany(WaliSantri::class, 'santri_id');
+    }
+
+    public function ayah(): HasOne
+    {
+        return $this->hasOne(WaliSantri::class, 'santri_id')->where('jenis_wali', 'ayah');
+    }
+
+    public function ibu(): HasOne
+    {
+        return $this->hasOne(WaliSantri::class, 'santri_id')->where('jenis_wali', 'ibu');
+    }
+
+    public function kamar(): HasOne
+    {
+        return $this->hasOne(PenghuniKamar::class, 'santri_id')->where('status', 'aktif');
+    }
+
+    // ── Scopes ────────────────────────────────────────────────────
 
     public function scopeActive($query)
     {
         return $query->where('status', 'aktif');
+    }
+
+    public function scopeStatus($query, string $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    public function scopeJenisKelamin($query, string $jk)
+    {
+        return $query->where('jenis_kelamin', $jk);
     }
 
     /**

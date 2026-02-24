@@ -18,6 +18,7 @@ use App\Http\Controllers\PerizinanController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\PenghuniKamarController;
+use App\Http\Controllers\PengajarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,11 +75,6 @@ Route::middleware(['auth', 'role'])->group(function () {
     // ── Wali portal ───────────────────────────────────────────────────────
     Route::middleware(['role:WALI'])->group(function () {
         Route::get('/wali/dashboard', [WaliController::class, 'dashboard'])->name('wali.dashboard');
-    });
-
-    // ── View Santri profile (all authenticated roles can view a student) ──
-    Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS,STAFF_TU,BENDAHARA,WALI,SANTRI'])->group(function () {
-        Route::get('/santri/{id}', [SantriController::class, 'show'])->name('santri.show');
     });
 
     // =========================================================================
@@ -262,4 +258,60 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::delete('/{id}', [GedungController::class, 'destroy'])->name('destroy');
         });
     });
+
+    // ── Santri ────────────────────────────────────────────────────────────────
+    Route::prefix('santri')->name('santri.')->group(function () {
+
+        // All staff can view student profiles
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS,STAFF_TU,BENDAHARA'])->group(function () {
+            Route::get('/',              [SantriController::class, 'index'])->name('index');
+            Route::get('/data',          [SantriController::class, 'getData'])->name('data');
+            Route::get('/search/santri', [SantriController::class, 'searchSantri'])->name('search-santri');
+        });
+
+        // ── View Santri profile (all authenticated roles can view a student) ──
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS,STAFF_TU,BENDAHARA,WALI,SANTRI'])->group(function () {
+            Route::get('/{id}/detail',  [SantriController::class, 'showDetail'])->name('show-detail');
+            Route::get('/{id}',         [SantriController::class, 'show'])->name('show');
+        });
+
+        // CUD restricted to admin layer
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,STAFF_TU'])->group(function () {
+            Route::post('/',             [SantriController::class, 'store'])->name('store');
+            Route::put('/{id}',          [SantriController::class, 'update'])->name('update');
+            Route::delete('/{id}',       [SantriController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    // ── Pengajar ──────────────────────────────────────────────────────────────
+    Route::prefix('pengajar')->name('pengajar.')->group(function () {
+
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,STAFF_TU'])->group(function () {
+            Route::get('/',        [PengajarController::class, 'index'])->name('index');
+            Route::get('/data',    [PengajarController::class, 'getData'])->name('data');
+            Route::post('/',       [PengajarController::class, 'store'])->name('store');
+            Route::get('/{id}',    [PengajarController::class, 'show'])->name('show');
+            Route::put('/{id}',    [PengajarController::class, 'update'])->name('update');
+            Route::delete('/{id}', [PengajarController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    // ── Wali Santri ───────────────────────────────────────────────────────────
+    Route::prefix('wali-santri')->name('wali-santri.')->group(function () {
+
+        // Walikelas needs to view guardian contacts
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,WALIKELAS,STAFF_TU'])->group(function () {
+            Route::get('/',        [WaliController::class, 'index'])->name('index');
+            Route::get('/data',    [WaliController::class, 'getData'])->name('data');
+            Route::get('/{id}',    [WaliController::class, 'show'])->name('show');
+        });
+
+        // CUD restricted to admin layer
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,STAFF_TU'])->group(function () {
+            Route::post('/',       [WaliController::class, 'store'])->name('store');
+            Route::put('/{id}',    [WaliController::class, 'update'])->name('update');
+            Route::delete('/{id}', [WaliController::class, 'destroy'])->name('destroy');
+        });
+    });
+
 });
