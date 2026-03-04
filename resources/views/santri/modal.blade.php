@@ -8,6 +8,7 @@
             </div>
             <form id="santriForm" enctype="multipart/form-data">
                 <div class="modal-body">
+                    @csrf
                     <input type="hidden" id="santriId" name="_id">
 
                     {{-- ── 1. Identitas Utama ── --}}
