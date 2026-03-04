@@ -273,7 +273,7 @@ $(document).ready(function () {
     function hideLoading()  { $('#loadingOverlay').removeClass('show'); }
     function showNotification(type, message) {
         Swal.fire({ icon: type, title: type === 'success' ? 'Berhasil!' : 'Gagal!', text: message,
-            timer: 3000, timerProgressBar: true, showConfirmButton: false, toast: true, position: 'top-end' });
+            timer: 3000, timerProgressBar: true, showConfirmButton: false, toast: true, position: 'bottom-end' });
     }
     function handleAjaxError(xhr) {
         let message = 'Terjadi kesalahan pada server';

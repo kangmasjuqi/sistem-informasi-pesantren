@@ -344,7 +344,7 @@ $(document).ready(function () {
             timerProgressBar: true,
             showConfirmButton: false,
             toast: true,
-            position: 'top-end',
+            position: 'bottom-end',
         });
     }
 
