@@ -19,6 +19,7 @@ use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\PenghuniKamarController;
 use App\Http\Controllers\PengajarController;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -294,6 +295,21 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::put('/{id}',    [PengajarController::class, 'update'])->name('update');
             Route::delete('/{id}', [PengajarController::class, 'destroy'])->name('destroy');
         });
+    });
+
+    // ── Kelas ──────────────────────────────────────────────────────────────
+    Route::prefix('kelas')->name('kelas.')->group(function () {
+
+        Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS'])->group(function () {
+            Route::get('/search/tahunajaran', [KelasController::class, 'searchTahunAjaran'])->name('search-tahun-ajaran');
+            Route::get('/search/pengajar', [KelasController::class, 'searchPengajar'])->name('search-pengajar');
+            Route::get('/',        [KelasController::class, 'index'])->name('index');
+            Route::get('/data',    [KelasController::class, 'getData'])->name('data');
+            Route::post('/',       [KelasController::class, 'store'])->name('store');
+            Route::get('/{id}',    [KelasController::class, 'show'])->name('show');
+            Route::put('/{id}',    [KelasController::class, 'update'])->name('update');
+            Route::delete('/{id}', [KelasController::class, 'destroy'])->name('destroy');
+     });
     });
 
     // ── Wali Santri ───────────────────────────────────────────────────────────
