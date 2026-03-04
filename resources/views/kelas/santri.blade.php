@@ -42,13 +42,19 @@
 </style>
 @endsection
 
+@php
+    $jumlah   = $kelas->santriAktif()->count();
+    $kapasitas = $kelas->kapasitas;
+    $pct      = $kapasitas > 0 ? min(100, round($jumlah / $kapasitas * 100)) : 0;
+    $barColor = $pct >= 100 ? '#ef4444' : ($pct >= 80 ? '#f59e0b' : '#fff');
+@endphp
 @section('header-actions')
 <div class="action-buttons d-flex gap-2 align-items-center">
     <a href="{{ route('kelas.index') }}" class="btn btn-outline-primary">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
         Kembali
     </a>
-    @if($kelas->status !== 'completed')
+    @if($kelas->status !== 'completed' && $jumlah < $kapasitas)
     <button class="btn btn-primary" id="btnEnroll">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
         Masukkan Santri
@@ -60,12 +66,6 @@
 @section('content')
 
 {{-- ── Kelas Hero Card ── --}}
-@php
-    $jumlah   = $kelas->santriAktif()->count();
-    $kapasitas = $kelas->kapasitas;
-    $pct      = $kapasitas > 0 ? min(100, round($jumlah / $kapasitas * 100)) : 0;
-    $barColor = $pct >= 100 ? '#ef4444' : ($pct >= 80 ? '#f59e0b' : '#fff');
-@endphp
 <div class="kelas-hero">
     <div>
         <p class="kelas-hero-sub">
