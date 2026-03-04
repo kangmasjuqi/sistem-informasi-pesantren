@@ -374,7 +374,9 @@ $(document).ready(function () {
             },
         },
         columns: colDefs,
-        pageLength: 25,
+        pageLength: 100,
+        order: [[0, 'asc']],
+        columnDefs: [{ type: 'string', targets: 0 }],
         language: {
             processing:'Memuat data...', search:'', lengthMenu:'Tampilkan _MENU_ data',
             info:'Menampilkan _START_–_END_ dari _TOTAL_ santri', infoEmpty:'0 data',

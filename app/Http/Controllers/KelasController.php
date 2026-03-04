@@ -306,44 +306,60 @@ class KelasController extends Controller
     public function santriData(Request $request, Kelas $kelas)
     {
         $query = KelasSantri::with('santri')
-            ->where('kelas_id', $kelas->id);
+            ->join('santri', 'santri.id', '=', 'kelas_santri.santri_id')
+            ->where('kelas_santri.kelas_id', $kelas->id)
+            ->select('kelas_santri.*');
 
         // Status filter
         if ($request->filled('status')) {
-            $query->where('status', $request->status);
+            $query->where('kelas_santri.status', $request->status);
         }
 
         // Global search on santri name / NIS
         if (!empty($request->search['value'])) {
             $s = $request->search['value'];
-            $query->whereHas('santri', fn($q) => $q
-                ->where('nama_lengkap', 'like', "%{$s}%")
-                ->orWhere('nis', 'like', "%{$s}%")
+            $query->where(fn($q) => $q
+                ->where('santri.nama_lengkap', 'like', "%{$s}%")
+                ->orWhere('santri.nis', 'like', "%{$s}%")
             );
         }
 
         $total    = KelasSantri::where('kelas_id', $kelas->id)->count();
         $filtered = $query->count();
 
-        $query->orderBy('status')->orderByDesc('tanggal_masuk');
+        // Sortable columns — index matches DataTables column order
+        $columns = [
+            0 => 'santri.nama_lengkap',
+            1 => 'kelas_santri.tanggal_masuk',
+            2 => 'kelas_santri.tanggal_keluar',
+            3 => 'kelas_santri.tanggal_keluar', // durasi — proxy sort by tanggal_keluar
+            4 => 'kelas_santri.keterangan',
+            5 => 'kelas_santri.status',
+        ];
+
+        $orderColIdx = $request->input('order.0.column', 0);
+        $orderDir    = $request->input('order.0.dir', 'asc') === 'desc' ? 'desc' : 'asc';
+        $orderCol    = $columns[$orderColIdx] ?? 'santri.nama_lengkap';
+
+        $query->orderBy($orderCol, $orderDir);
 
         $data = $query
             ->skip($request->start  ?? 0)
             ->take($request->length ?? 25)
             ->get()
             ->map(fn($ks) => [
-                'id'               => $ks->id,
-                'santri_id'        => $ks->santri_id,
-                'santri_nama'      => $ks->santri?->nama_lengkap,
-                'santri_nis'       => $ks->santri?->nis,
-                'tanggal_masuk'    => $ks->tanggal_masuk?->format('Y-m-d'),
-                'tanggal_masuk_fmt'=> $ks->tanggal_masuk?->isoFormat('D MMM YYYY'),
-                'tanggal_keluar'   => $ks->tanggal_keluar?->format('Y-m-d'),
+                'id'                => $ks->id,
+                'santri_id'         => $ks->santri_id,
+                'santri_nama'       => $ks->santri?->nama_lengkap,
+                'santri_nis'        => $ks->santri?->nis,
+                'tanggal_masuk'     => $ks->tanggal_masuk?->format('Y-m-d'),
+                'tanggal_masuk_fmt' => $ks->tanggal_masuk?->isoFormat('D MMM YYYY'),
+                'tanggal_keluar'    => $ks->tanggal_keluar?->format('Y-m-d'),
                 'tanggal_keluar_fmt'=> $ks->tanggal_keluar?->isoFormat('D MMM YYYY'),
-                'status'           => $ks->status,
-                'status_label'     => $ks->status_label,
-                'durasi_label'     => $ks->durasi_label,
-                'keterangan'       => $ks->keterangan,
+                'status'            => $ks->status,
+                'status_label'      => $ks->status_label,
+                'durasi_label'      => $ks->durasi_label,
+                'keterangan'        => $ks->keterangan,
             ]);
 
         return response()->json([
