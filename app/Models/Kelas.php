@@ -20,12 +20,11 @@ class Kelas extends Model
         'tingkat',
         'kapasitas',
         'deskripsi',
-        'is_active',
+        'status',
     ];
 
     protected $casts = [
         'kapasitas' => 'integer',
-        'is_active' => 'boolean',
     ];
 
     // ── Relationships ─────────────────────────────────────────────
@@ -54,7 +53,17 @@ class Kelas extends Model
 
     public function scopeAktif($query)
     {
-        return $query->where('is_active', 1);
+        return $query->where('status', 'active');
+    }
+
+    public function scopeInaktif($query)
+    {
+        return $query->where('status', 'inactive');
+    }
+
+    public function scopeCompleted($query)
+    {
+        return $query->where('status', 'completed');
     }
 
     public function scopeTingkat($query, string $tingkat)
@@ -75,9 +84,29 @@ class Kelas extends Model
             '1'           => 'Tingkat 1',
             '2'           => 'Tingkat 2',
             '3'           => 'Tingkat 3',
-            'Ibtidaiyah'  => 'Ibtidaiyah',
+            '4'           => 'Tingkat 4',
+            '5'           => 'Tingkat 5',
+            '6'           => 'Tingkat 6',
             'Tsanawiyah'  => 'Tsanawiyah',
             'Aliyah'      => 'Aliyah',
+        ];
+    }
+
+    public static function statusLabels(): array
+    {
+        return [
+            'active'    => 'Aktif',
+            'inactive'  => 'Tidak Aktif',
+            'completed' => 'Selesai',
+        ];
+    }
+
+    public static function statusOptions(): array
+    {
+        return [
+            'active'    => ['label' => 'Aktif',       'css' => 'status-aktif'],
+            'inactive'  => ['label' => 'Tidak Aktif', 'css' => 'status-tidak_aktif'],
+            'completed' => ['label' => 'Selesai',     'css' => 'kategori-lainnya'],
         ];
     }
 
@@ -90,7 +119,17 @@ class Kelas extends Model
 
     public function getStatusLabelAttribute(): string
     {
-        return $this->is_active ? 'Aktif' : 'Tidak Aktif';
+        return static::statusLabels()[$this->status] ?? $this->status;
+    }
+
+    public function getStatusCssAttribute(): string
+    {
+        return static::statusOptions()[$this->status]['css'] ?? 'badge-default';
+    }
+
+    public function getIsAktifAttribute(): bool
+    {
+        return $this->status === 'active';
     }
 
     public function getJumlahSantriAttribute(): int

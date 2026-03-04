@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\TahunAjaran;
 use App\Models\Pengajar;
-use App\Models\KelasSantri;
 
 class KelasController extends Controller
 {
     public function index()
     {
-        return view('kelas.index');
+        return view('kelas.index', [
+            'tingkatOptions' => Kelas::tingkatOptions(),
+            'statusOptions'  => Kelas::statusOptions(),
+        ]);
     }
 
     public function getData(Request $request)
@@ -42,17 +44,17 @@ class KelasController extends Controller
         if (!empty($request->nama_kelas)) {
             $query->where('nama_kelas', 'like', "%{$request->nama_kelas}%");
         }
-        if ($request->filled('is_active') && $request->is_active !== '') {
-            $query->where('is_active', $request->is_active);
+        if ($request->filled('status') && $request->status !== '') {
+            $query->where('status', $request->status);
         }
 
         $totalRecords    = Kelas::count();
         $filteredRecords = $query->count();
 
-        $columns     = ['id', 'tahun_ajaran_id', 'nama_kelas', 'tingkat', 'kapasitas', 'wali_kelas_id', 'is_active'];
+        $columns     = ['id', 'tahun_ajaran_id', 'nama_kelas', 'tingkat', 'kapasitas', 'wali_kelas_id', 'status'];
         $orderColIdx = $request->order[0]['column'] ?? 2;
         $orderDir    = $request->order[0]['dir']    ?? 'desc';
-        $orderCol    = $columns[$orderColIdx] ?? 'id';
+        $orderCol    = $columns[$orderColIdx] ?? 'tahun_ajaran_id';
 
         $query->orderBy($orderCol, $orderDir);
 
@@ -77,8 +79,8 @@ class KelasController extends Controller
                 'sisa_kapasitas'      => max(0, $k->kapasitas - $jumlah),
                 'is_full'             => $jumlah >= $k->kapasitas,
                 'deskripsi'           => $k->deskripsi,
-                'is_active'           => $k->is_active,
-                'status_label'        => $k->status_label,
+                'status'              => $k->status,
+                'status_label'        => $k->status_label
             ];
         });
 
@@ -110,7 +112,7 @@ class KelasController extends Controller
                 'tingkat'         => $request->tingkat,
                 'kapasitas'       => $request->kapasitas ?? 30,
                 'deskripsi'       => $request->deskripsi,
-                'is_active'       => $request->boolean('is_active', true),
+                'status'          => $request->status ?? 'active',
             ]);
 
             return response()->json([
@@ -144,7 +146,7 @@ class KelasController extends Controller
                 'kapasitas'         => $k->kapasitas,
                 'jumlah_santri'     => $jumlah,
                 'deskripsi'         => $k->deskripsi,
-                'is_active'         => $k->is_active,
+                'status'            => $k->status,
             ],
         ]);
     }
@@ -170,7 +172,7 @@ class KelasController extends Controller
                 'tingkat'         => $request->tingkat,
                 'kapasitas'       => $request->kapasitas ?? 30,
                 'deskripsi'       => $request->deskripsi,
-                'is_active'       => $request->boolean('is_active', true),
+                'status'          => $request->status ?? 'active',
             ]);
 
             return response()->json([
@@ -221,7 +223,7 @@ class KelasController extends Controller
             'tingkat'         => 'required|string|max:20',
             'kapasitas'       => 'nullable|integer|min:1|max:200',
             'deskripsi'       => 'nullable|string',
-            'is_active'       => 'nullable|boolean',
+            'status'          => 'nullable|in:active,inactive,completed',
         ];
     }
 

@@ -31,12 +31,6 @@
                                 <label class="form-label">Tingkat <span class="badge badge-required">WAJIB</span></label>
                                 <select class="form-select" id="tingkat" name="tingkat" required>
                                     <option value="">Pilih Tingkat</option>
-                                    <option value="1">Tingkat 1</option>
-                                    <option value="2">Tingkat 2</option>
-                                    <option value="3">Tingkat 3</option>
-                                    <option value="Ibtidaiyah">Ibtidaiyah</option>
-                                    <option value="Tsanawiyah">Tsanawiyah</option>
-                                    <option value="Aliyah">Aliyah</option>
                                 </select>
                             </div>
                         </div>
@@ -75,9 +69,7 @@
                             </div>
                             <div>
                                 <label class="form-label">Status Kelas</label>
-                                <select class="form-select" id="is_active" name="is_active">
-                                    <option value="1">✅ Aktif</option>
-                                    <option value="0">⛔ Tidak Aktif</option>
+                                <select class="form-select" id="status" name="status">
                                 </select>
                             </div>
                         </div>

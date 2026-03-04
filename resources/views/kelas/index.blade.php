@@ -41,12 +41,6 @@
                     <label class="form-label">Tingkat</label>
                     <select class="form-select" id="filterTingkat">
                         <option value="">Semua Tingkat</option>
-                        <option value="1">Tingkat 1</option>
-                        <option value="2">Tingkat 2</option>
-                        <option value="3">Tingkat 3</option>
-                        <option value="Ibtidaiyah">Ibtidaiyah</option>
-                        <option value="Tsanawiyah">Tsanawiyah</option>
-                        <option value="Aliyah">Aliyah</option>
                     </select>
                 </div>
                 <div>
@@ -57,8 +51,6 @@
                     <label class="form-label">Status</label>
                     <select class="form-select" id="filterStatus">
                         <option value="">Semua</option>
-                        <option value="1">Aktif</option>
-                        <option value="0">Tidak Aktif</option>
                     </select>
                 </div>
                 <div style="display:flex; align-items:end;">
@@ -102,13 +94,30 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(document).ready(function () {
+
+    const TINGKAT_OPTIONS = @json($tingkatOptions);
+    const STATUS_OPTIONS = @json($statusOptions);
+    const statusMap = STATUS_OPTIONS;
+
+    // Build #filterTingkat options from the map
+    Object.entries(TINGKAT_OPTIONS).forEach(([val, label]) => {
+        $('#filterTingkat').append(new Option(label, val));
+    });
+
+    Object.entries(TINGKAT_OPTIONS).forEach(([val, label]) => {
+        $('#tingkat').append(new Option(label, val));
+    });
+
+    Object.entries(statusMap).forEach(([val, opt]) => {
+        $('#filterStatus').append(new Option(opt.label, val));
+    });
+
+    Object.entries(statusMap).forEach(([val, opt]) => {
+        $('#status').append(new Option(opt.label, val));
+    });
+
     let table;
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-    const statusMap = {
-        true:  { label: 'Aktif',       cls: 'status-aktif' },
-        false: { label: 'Tidak Aktif', cls: 'status-tidak_aktif' },
-    };
 
     initDataTable();
 
@@ -191,7 +200,7 @@ $(document).ready(function () {
                 tingkat:         $('#tingkat').val(),
                 kapasitas:       $('#kapasitas').val(),
                 deskripsi:       $('#deskripsi').val(),
-                is_active:       $('#is_active').val(),
+                status:          $('#status').val(),
             },
             success: res => {
                 hideLoading();
@@ -238,7 +247,7 @@ $(document).ready(function () {
                     d.tahun_ajaran_id = $('#filterTahunAjaran').val();
                     d.tingkat         = $('#filterTingkat').val();
                     d.nama_kelas      = $('#filterNama').val();
-                    d.is_active       = $('#filterStatus').val();
+                    d.status          = $('#filterStatus').val();
                 },
             },
             columns: [
@@ -284,26 +293,25 @@ $(document).ready(function () {
                     },
                 },
                 {
-                    data: 'is_active',
+                    data: 'status',
                     render: function (d) {
-                        const s = statusMap[d] ?? { label: d ? 'Aktif' : 'Tidak Aktif', cls: 'badge-default' };
-                        return `<span class="status-badge ${s.cls}">${s.label.toUpperCase()}</span>`;
+                        const s = statusMap[d] ?? { label: d, css: 'badge-default' };
+                        return `<span class="status-badge ${s.css}">${s.label.toUpperCase()}</span>`;
                     },
                 },
                 {
                     data: null,
                     orderable: false,
                     render: function (row) {
-                        return `<div style="display:flex; gap:.25rem;">
-                            <button class="btn btn-sm btn-primary btn-edit" data-id="${row.id}" title="Edit">
+                        const editBtn = row.status !== 'completed'
+                            ? `<button class="btn btn-sm btn-primary btn-edit" data-id="${row.id}" title="Edit">
                                 <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg>
-                            </button>
-                            <!--<button class="btn btn-sm btn-danger btn-delete" data-id="${row.id}" data-nama="${row.nama_kelas}" title="Hapus">
-                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>
-                            </button>-->
-                        </div>`;
+                            </button>`
+                            : `<span style="color:#9ca3af; font-size:.75rem; padding:0 .25rem;" title="Kelas sudah selesai">—</span>`;
+
+                        return `<div style="display:flex; gap:.25rem; align-items:center;">${editBtn}</div>`;
                     },
-                },
+                }
             ],
             order: [[0, 'desc']],
             pageLength: 10,
@@ -345,7 +353,7 @@ $(document).ready(function () {
                 $('#tingkat').val(d.tingkat);
                 $('#kapasitas').val(d.kapasitas);
                 $('#deskripsi').val(d.deskripsi);
-                $('#is_active').val(d.is_active ? '1' : '0');
+                $('#status').val(d.status);
 
                 $('#kelasModal').modal('show');
             },
@@ -359,7 +367,7 @@ $(document).ready(function () {
         $('#tahun_ajaran_id').val(null).trigger('change');
         $('#wali_kelas_id').val(null).trigger('change');
         $('#kapasitas').val(30);
-        $('#is_active').val('1');
+        $('#status').val('active');
     }
 
     function showLoading()  { $('#loadingOverlay').addClass('show'); }
