@@ -84,7 +84,7 @@
 
     <div class="kelas-stats">
         <div class="kelas-stat">
-            <div class="kelas-stat-val">{{ $jumlah }}</div>
+            <div class="kelas-stat-val" id="heroJumlah">{{ $jumlah }}</div>
             <div class="kelas-stat-lbl">Aktif</div>
         </div>
         <div class="kelas-stat">
@@ -92,10 +92,10 @@
             <div class="kelas-stat-lbl">Kapasitas</div>
         </div>
         <div class="kelas-stat cap-bar-wrap">
-            <div style="font-size:1rem; font-weight:700;">{{ $pct }}%</div>
+            <div style="font-size:1rem; font-weight:700;" id="heroPct">{{ $pct }}%</div>
             <div class="kelas-stat-lbl">Terisi</div>
             <div class="cap-bar-track">
-                <div class="cap-bar-fill" style="width:{{ $pct }}%; background:{{ $barColor }};"></div>
+                <div class="cap-bar-fill" id="heroBar" style="width:{{ $pct }}%; background:{{ $barColor }};"></div>
             </div>
         </div>
     </div>
@@ -504,16 +504,15 @@ $(document).ready(function () {
 
     // ── Refresh hero capacity bar without full reload ─────────
     function refreshHeroStats() {
-        // Light fetch to get updated jumlah_santri for this kelas
-        $.get(`/kelas/${KELAS_ID}`, function (res) {
-            if (!res.data) return;
-            const j   = res.data.jumlah_santri ?? 0;
-            const cap = res.data.kapasitas ?? 1;
-            const pct = Math.min(100, Math.round(j / cap * 100));
+        $.get(`/kelas/${KELAS_ID}/santri/data`, { start: 0, length: 1, status: 'aktif', draw: 0 }, function (res) {
+            const cap = {{ $kapasitas }};
+            const j   = res.recordsFiltered ?? 0;
+            const pct = cap > 0 ? Math.min(100, Math.round(j / cap * 100)) : 0;
             const color = pct >= 100 ? '#ef4444' : pct >= 80 ? '#f59e0b' : '#fff';
-            $('.kelas-stat-val').first().text(j);
-            $('.cap-bar-fill').css({ width: pct + '%', background: color });
-            $('.kelas-stat-val').eq(2).prev().text(pct + '%');
+
+            $('#heroJumlah').text(j);
+            $('#heroPct').text(pct + '%');
+            $('#heroBar').css({ width: pct + '%', background: color });
         });
     }
 
