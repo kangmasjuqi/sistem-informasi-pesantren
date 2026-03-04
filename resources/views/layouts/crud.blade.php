@@ -1139,6 +1139,24 @@
     </div>
 
     <script>
+        window.showNotification = function (type, message) {
+            const icons = {
+                success: 'success',
+                error: 'error',
+                warning: 'warning',
+                info: 'info'
+            };
+            Swal.fire({
+                icon: icons[type],
+                title: type === 'success' ? 'Berhasil!' : type === 'error' ? 'Gagal!' : 'Perhatian!',
+                text: message,
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                toast: true,
+                position: 'bottom-end',
+            });
+        };
         // Tab functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize tabs

@@ -335,19 +335,6 @@ $(document).ready(function () {
     function showLoading()  { $('#loadingOverlay').addClass('show'); }
     function hideLoading()  { $('#loadingOverlay').removeClass('show'); }
 
-    function showNotification(type, message) {
-        Swal.fire({
-            icon: type,
-            title: type === 'success' ? 'Berhasil!' : type === 'error' ? 'Gagal!' : 'Perhatian!',
-            text: message,
-            timer: 3000,
-            timerProgressBar: true,
-            showConfirmButton: false,
-            toast: true,
-            position: 'bottom-end',
-        });
-    }
-
     function handleAjaxError(xhr) {
         let message = 'Terjadi kesalahan pada server';
         if (xhr.responseJSON?.message) message = xhr.responseJSON.message;
