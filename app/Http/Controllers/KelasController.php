@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\TahunAjaran;
 use App\Models\Pengajar;
+use App\Models\KelasSantri;
 
 class KelasController extends Controller
 {
@@ -244,6 +244,7 @@ class KelasController extends Controller
         $q = trim($request->get('q', ''));
 
         $results = Pengajar::where('nama_lengkap', 'like', "%{$q}%")
+            ->where('status', 'aktif')
             ->orderBy('nama_lengkap')
             ->limit(20)
             ->get(['id', 'nama_lengkap', 'nip'])
@@ -256,6 +257,20 @@ class KelasController extends Controller
     }
 
     // ── Select2 AJAX: search tahun ajaran ─────────────────────────
+    public function getAktifTahunAjaran(Request $request)
+    {
+        $results = TahunAjaran::where('is_active', '=', 1)
+            ->orderByDesc('nama')
+            ->limit(20)
+            ->get(['id', 'nama'])
+            ->map(fn($t) => [
+                'id'   => $t->id,
+                'text' => $t->nama,
+            ]);
+
+        return response()->json(['results' => $results]);
+    }
+
     public function searchTahunAjaran(Request $request)
     {
         $q = trim($request->get('q', ''));
@@ -267,6 +282,191 @@ class KelasController extends Controller
             ->map(fn($t) => [
                 'id'   => $t->id,
                 'text' => $t->nama,
+            ]);
+
+        return response()->json(['results' => $results]);
+    }
+
+    // ── GET /kelas/{id}/santri ────────────────────────────────────
+    public function santri(Kelas $kelas)
+    {
+        $kelas->load(['tahunAjaran', 'waliKelas']);
+
+        $statusOptions = [
+            'aktif'  => ['label' => 'Aktif',  'cls' => 'status-aktif'],
+            'lulus'  => ['label' => 'Lulus',  'cls' => 'kategori-bulanan'],
+            'pindah' => ['label' => 'Pindah', 'cls' => 'kategori-kegiatan'],
+            'keluar' => ['label' => 'Keluar', 'cls' => 'status-tidak_aktif'],
+        ];
+
+        return view('kelas.santri', compact('kelas', 'statusOptions'));
+    }
+
+    // ── GET /kelas/{id}/santri/data  (DataTables AJAX) ───────────
+    public function santriData(Request $request, Kelas $kelas)
+    {
+        $query = KelasSantri::with('santri')
+            ->where('kelas_id', $kelas->id);
+
+        // Status filter
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Global search on santri name / NIS
+        if (!empty($request->search['value'])) {
+            $s = $request->search['value'];
+            $query->whereHas('santri', fn($q) => $q
+                ->where('nama_lengkap', 'like', "%{$s}%")
+                ->orWhere('nis', 'like', "%{$s}%")
+            );
+        }
+
+        $total    = KelasSantri::where('kelas_id', $kelas->id)->count();
+        $filtered = $query->count();
+
+        $query->orderBy('status')->orderByDesc('tanggal_masuk');
+
+        $data = $query
+            ->skip($request->start  ?? 0)
+            ->take($request->length ?? 25)
+            ->get()
+            ->map(fn($ks) => [
+                'id'               => $ks->id,
+                'santri_id'        => $ks->santri_id,
+                'santri_nama'      => $ks->santri?->nama_lengkap,
+                'santri_nis'       => $ks->santri?->nis,
+                'tanggal_masuk'    => $ks->tanggal_masuk?->format('Y-m-d'),
+                'tanggal_masuk_fmt'=> $ks->tanggal_masuk?->isoFormat('D MMM YYYY'),
+                'tanggal_keluar'   => $ks->tanggal_keluar?->format('Y-m-d'),
+                'tanggal_keluar_fmt'=> $ks->tanggal_keluar?->isoFormat('D MMM YYYY'),
+                'status'           => $ks->status,
+                'status_label'     => $ks->status_label,
+                'durasi_label'     => $ks->durasi_label,
+                'keterangan'       => $ks->keterangan,
+            ]);
+
+        return response()->json([
+            'draw'            => intval($request->draw),
+            'recordsTotal'    => $total,
+            'recordsFiltered' => $filtered,
+            'data'            => $data,
+        ]);
+    }
+
+    // ── POST /kelas/{id}/santri  (enroll) ────────────────────────
+    public function santriStore(Request $request, Kelas $kelas)
+    {
+        $validator = Validator::make($request->all(), [
+            'santri_id'     => 'required|exists:santri,id',
+            'tanggal_masuk' => 'required|date',
+            'keterangan'    => 'nullable|string',
+        ], [
+            'santri_id.required'     => 'Santri harus dipilih',
+            'santri_id.exists'       => 'Santri tidak ditemukan',
+            'tanggal_masuk.required' => 'Tanggal masuk harus diisi',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'message' => 'Validasi gagal', 'errors' => $validator->errors()], 422);
+        }
+
+        // Guard: already active in THIS kelas
+        $alreadyInThisKelas = KelasSantri::where('kelas_id', $kelas->id)
+            ->where('santri_id', $request->santri_id)
+            ->where('status', 'aktif')
+            ->exists();
+
+        if ($alreadyInThisKelas) {
+            return response()->json(['success' => false, 'message' => 'Santri sudah terdaftar aktif di kelas ini.'], 422);
+        }
+
+        // Guard: already active in another kelas in the same tahun ajaran
+        $alreadyElsewhere = KelasSantri::where('santri_id', $request->santri_id)
+            ->where('status', 'aktif')
+            ->whereHas('kelas', fn($q) => $q->where('tahun_ajaran_id', $kelas->tahun_ajaran_id))
+            ->with('kelas')
+            ->first();
+
+        if ($alreadyElsewhere) {
+            return response()->json([
+                'success' => false,
+                'message' => "Santri sudah aktif di kelas {$alreadyElsewhere->kelas->nama_kelas} pada tahun ajaran yang sama.",
+            ], 422);
+        }
+
+        // Guard: kelas is full
+        if ($kelas->is_full) {
+            return response()->json(['success' => false, 'message' => 'Kelas sudah mencapai kapasitas maksimal.'], 422);
+        }
+
+        try {
+            $ks = KelasSantri::create([
+                'kelas_id'      => $kelas->id,
+                'santri_id'     => $request->santri_id,
+                'tanggal_masuk' => $request->tanggal_masuk,
+                'status'        => 'aktif',
+                'keterangan'    => $request->keterangan,
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'Santri berhasil didaftarkan ke kelas.', 'data' => $ks]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+        }
+    }
+
+    // ── PATCH /kelas/{id}/santri/{ksId}/exit  (exit santri) ──────
+    public function santriExit(Request $request, Kelas $kelas, int $ksId)
+    {
+        $ks = KelasSantri::where('kelas_id', $kelas->id)->findOrFail($ksId);
+
+        $validator = Validator::make($request->all(), [
+            'status'         => 'required|in:lulus,pindah,keluar',
+            'tanggal_keluar' => 'required|date|after_or_equal:' . $ks->tanggal_masuk->format('Y-m-d'),
+            'keterangan'     => 'nullable|string',
+        ], [
+            'status.required'         => 'Status keluar harus dipilih',
+            'tanggal_keluar.required' => 'Tanggal keluar harus diisi',
+            'tanggal_keluar.after_or_equal' => 'Tanggal keluar tidak boleh sebelum tanggal masuk',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'message' => 'Validasi gagal', 'errors' => $validator->errors()], 422);
+        }
+
+        if ($ks->status !== 'aktif') {
+            return response()->json(['success' => false, 'message' => 'Santri ini sudah tidak aktif di kelas.'], 422);
+        }
+
+        try {
+            $ks->keluarkan($request->status, $request->keterangan, \Carbon\Carbon::parse($request->tanggal_keluar));
+            return response()->json(['success' => true, 'message' => 'Status santri berhasil diperbarui.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+        }
+    }
+
+    // ── GET /kelas/{id}/santri/available  (Select2 AJAX) ─────────
+    public function santriAvailable(Request $request, Kelas $kelas)
+    {
+        $q = trim($request->get('q', ''));
+
+        // Exclude santri already active in any kelas this tahun ajaran
+        $enrolled = KelasSantri::where('status', 'aktif')
+            ->whereHas('kelas', fn($query) => $query->where('tahun_ajaran_id', $kelas->tahun_ajaran_id))
+            ->pluck('santri_id');
+
+        $results = \App\Models\Santri::whereNotIn('id', $enrolled)
+            ->where(fn($query) => $query
+                ->where('nama_lengkap', 'like', "%{$q}%")
+                ->orWhere('nis', 'like', "%{$q}%")
+            )
+            ->orderBy('nama_lengkap')
+            ->limit(20)
+            ->get(['id', 'nama_lengkap', 'nis'])
+            ->map(fn($s) => [
+                'id'   => $s->id,
+                'text' => "{$s->nis} – {$s->nama_lengkap}",
             ]);
 
         return response()->json(['results' => $results]);

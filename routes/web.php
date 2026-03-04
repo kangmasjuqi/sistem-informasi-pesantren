@@ -301,7 +301,13 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::prefix('kelas')->name('kelas.')->group(function () {
 
         Route::middleware(['role:SUPERADMIN,ADMIN,KEPSEK,PENGAJAR,WALIKELAS'])->group(function () {
+            Route::get ('/{kelas}/santri',                    [KelasController::class, 'santri'])->name('santri');
+            Route::get ('/{kelas}/santri/data',               [KelasController::class, 'santriData'])->name('santri.data');
+            Route::post('/{kelas}/santri',                    [KelasController::class, 'santriStore'])->name('santri.store');
+            Route::patch('/{kelas}/santri/{ksId}/exit',       [KelasController::class, 'santriExit'])->name('santri.exit');
+            Route::get ('/{kelas}/santri/available',          [KelasController::class, 'santriAvailable'])->name('santri.available');
             Route::get('/search/tahunajaran', [KelasController::class, 'searchTahunAjaran'])->name('search-tahun-ajaran');
+            Route::get('/search/aktif-tahun-ajaran', [KelasController::class, 'getAktifTahunAjaran'])->name('get-aktif-tahun-ajaran');
             Route::get('/search/pengajar', [KelasController::class, 'searchPengajar'])->name('search-pengajar');
             Route::get('/',        [KelasController::class, 'index'])->name('index');
             Route::get('/data',    [KelasController::class, 'getData'])->name('data');

@@ -39,7 +39,7 @@
                     {{-- ── 2. Wali Kelas & Kapasitas ── --}}
                     <div style="margin-bottom:1.25rem;">
                         <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid #e5e7eb;">
-                            Pengajar & Kapasitas
+                            Wali Kelas & Kapasitas
                         </div>
                         <div class="form-row" style="grid-template-columns: repeat(3, 1fr);">
                             <div style="grid-column: span 2;">
