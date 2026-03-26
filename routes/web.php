@@ -20,6 +20,7 @@ use App\Http\Controllers\KamarController;
 use App\Http\Controllers\PenghuniKamarController;
 use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PengampuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -335,5 +336,20 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::delete('/{id}', [WaliController::class, 'destroy'])->name('destroy');
         });
     });
+
+    Route::prefix('pengampu')->name('pengampu.')->group(function () {
+        Route::get('/',                       [PengampuController::class, 'index'])->name('index');
+        Route::get('/data',                   [PengampuController::class, 'getData'])->name('data');
+        Route::post('/batch',                 [PengampuController::class, 'batchStore'])->name('batch-store');
+        Route::get('/{id}',                   [PengampuController::class, 'show'])->name('show');
+        Route::put('/{id}',                   [PengampuController::class, 'update'])->name('update');
+        Route::delete('/{id}',               [PengampuController::class, 'destroy'])->name('destroy');
+
+        // Select2 search endpoints
+        Route::get('/search/pengajar',        [PengampuController::class, 'searchPengajar'])->name('search-pengajar');
+        Route::get('/search/mata-pelajaran',  [PengampuController::class, 'searchMataPelajaran'])->name('search-mata-pelajaran');
+        Route::get('/search/kelas',           [PengampuController::class, 'searchKelas'])->name('search-kelas');
+        Route::get('/search/semester',        [PengampuController::class, 'searchSemester'])->name('search-semester');
+    });    
 
 });

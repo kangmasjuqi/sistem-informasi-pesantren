@@ -116,6 +116,15 @@
                     </a>
                     @endif
 
+                    {{-- Pengampu — teaching staff need to see & manage their subjects --}}
+                    @if(auth()->user()->hasRole(['SUPERADMIN','ADMIN','KEPSEK','PENGAJAR','WALIKELAS']))
+                    <a href="{{ route('pengampu.index') }}" class="nav-link {{ request()->routeIs('pengampu.*') || request()->is('pengampu*') ? 'active' : '' }}">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m-7-3h14"/>
+                        </svg>
+                        <span>Pengampu</span>
+                    </a>
+                    @endif
                 </div>
 
                 {{-- ================= OPERASIONAL ================= --}}
