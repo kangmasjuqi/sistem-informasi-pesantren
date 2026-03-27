@@ -21,6 +21,7 @@ use App\Http\Controllers\PenghuniKamarController;
 use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PengampuController;
+use App\Http\Controllers\NilaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -351,5 +352,18 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/search/kelas',           [PengampuController::class, 'searchKelas'])->name('search-kelas');
         Route::get('/search/semester',        [PengampuController::class, 'searchSemester'])->name('search-semester');
     });    
+
+    Route::prefix('nilai')->name('nilai.')->group(function () {
+        Route::get('/',                      [NilaiController::class, 'index'])->name('index');
+        Route::get('/grid',                  [NilaiController::class, 'grid'])->name('grid');
+        Route::post('/batch',                [NilaiController::class, 'batchSave'])->name('batch-save');
+        Route::get('/rekap',                 [NilaiController::class, 'rekap'])->name('rekap');
+        Route::delete('/{id}',              [NilaiController::class, 'destroy'])->name('destroy');
+
+        // Select2 search endpoints
+        Route::get('/search/pengampu',       [NilaiController::class, 'searchPengampu'])->name('search-pengampu');
+        Route::get('/search/semester',       [NilaiController::class, 'searchSemester'])->name('search-semester');
+        Route::get('/search/kelas',          [NilaiController::class, 'searchKelas'])->name('search-kelas');
+    });
 
 });

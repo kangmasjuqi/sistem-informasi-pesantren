@@ -126,7 +126,7 @@
             align-items: center;
             gap: 0.75rem;
             padding: 0.75rem 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(141, 137, 137, 0.8);
             text-decoration: none;
             transition: all 0.2s ease;
             font-weight: 500;
