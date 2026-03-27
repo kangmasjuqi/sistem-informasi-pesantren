@@ -79,8 +79,8 @@
 
     /* ── Sticky save bar ─────────────────────────────────────── */
     .save-bar {
-        position: sticky; bottom: 0; background: #fff;
-        border-top: 2px solid #e5e7eb; padding: .75rem 1rem;
+        bottom: 0; background: #fff;
+        border-top: 2px solid #e5e7eb; padding: .75rem 1rem 1.75rem 1rem;
         display: flex; align-items: center; justify-content: space-between;
         gap: 1rem; flex-wrap: wrap; z-index: 10; margin: 0 -1.25rem -1.25rem;
         border-radius: 0 0 12px 12px;
