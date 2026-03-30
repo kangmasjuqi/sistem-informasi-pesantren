@@ -22,6 +22,7 @@ use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PengampuController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\JadwalPelajaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -364,6 +365,21 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/search/pengampu',       [NilaiController::class, 'searchPengampu'])->name('search-pengampu');
         Route::get('/search/semester',       [NilaiController::class, 'searchSemester'])->name('search-semester');
         Route::get('/search/kelas',          [NilaiController::class, 'searchKelas'])->name('search-kelas');
+    });
+
+    Route::prefix('jadwal-pelajaran')->name('jadwal-pelajaran.')->group(function () {
+        Route::get('/',                    [JadwalPelajaranController::class, 'index'])->name('index');
+        Route::get('/timetable',           [JadwalPelajaranController::class, 'timetable'])->name('timetable');
+        Route::post('/',                   [JadwalPelajaranController::class, 'store'])->name('store');
+        Route::get('/{id}',                [JadwalPelajaranController::class, 'show'])->name('show');
+        Route::put('/{id}',                [JadwalPelajaranController::class, 'update'])->name('update');
+        Route::delete('/{id}',             [JadwalPelajaranController::class, 'destroy'])->name('destroy');
+        Route::get('/pengajar/view',       [JadwalPelajaranController::class, 'pengajarTimetable'])->name('pengajar-timetable');
+
+        // Select2
+        Route::get('/search/semester',     [JadwalPelajaranController::class, 'searchSemester'])->name('search-semester');
+        Route::get('/search/kelas',        [JadwalPelajaranController::class, 'searchKelas'])->name('search-kelas');
+        Route::get('/search/pengampu',     [JadwalPelajaranController::class, 'searchPengampu'])->name('search-pengampu');
     });
 
 });
