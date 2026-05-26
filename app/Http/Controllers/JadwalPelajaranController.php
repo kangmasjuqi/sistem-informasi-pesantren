@@ -291,8 +291,7 @@ class JadwalPelajaranController extends Controller
     {
         $semesterId = $request->get('semester_id');
 
-        $query = Kelas::where('nama_kelas', 'like', '%' . $request->get('q') . '%')
-            ->aktif();
+        $query = Kelas::where('nama_kelas', 'like', '%' . $request->get('q') . '%');
 
         if ($semesterId) {
             $query->whereHas('kelasSantri')->whereExists(
