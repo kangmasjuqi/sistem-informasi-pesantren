@@ -118,12 +118,12 @@
 @endsection
 
 @section('header-actions')
-<div class="action-buttons d-flex gap-2">
+<!--<div class="action-buttons d-flex gap-2">
     <button class="btn btn-outline-primary" id="btnListView">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
         Tampilan List
     </button>
-</div>
+</div>-->
 @endsection
 
 @section('content')
@@ -359,7 +359,7 @@ $(document).ready(function () {
             // Context bar
             $('#ctxSemester').text(res.semester.nama);
             $('#ctxKelas').text('Kelas ' + res.kelas.nama_kelas + ' — Tingkat ' + res.kelas.tingkat);
-            $('#ctxWali').text(res.kelas.wali_kelas ? '👤 ' + res.kelas.wali_kelas : '');
+            $('#ctxWali').text(res.kelas.wali_kelas ? '👤 Wali Kelas : ' + res.kelas.wali_kelas : '');
             $('#ctxSlots').text(res.total_slots + ' slot jadwal');
 
             buildTimetable(res.timetable);
@@ -618,6 +618,7 @@ $(document).ready(function () {
     });
 
     // ── List view button ───────────────────────────────────────
+    /*
     $('#btnListView').on('click', function () {
         if (!currentSemesterId || !currentKelasId) {
             showNotification('error', 'Pilih semester dan kelas terlebih dahulu.');
@@ -626,6 +627,7 @@ $(document).ready(function () {
         // Open list in new tab or redirect
         window.open(`/jadwal-pelajaran/list?semester_id=${currentSemesterId}&kelas_id=${currentKelasId}`, '_blank');
     });
+    */
 
     // ── Helpers ───────────────────────────────────────────────
     function showLoading()  { $('#loadingOverlay').addClass('show'); }

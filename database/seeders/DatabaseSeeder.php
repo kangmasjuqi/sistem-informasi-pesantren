@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('');
 
         // // STEP 1: MASTER DATA
-        $this->command->info('📋 Seeding Master Data...');
-        $this->call([
+        // $this->command->info('📋 Seeding Master Data...');
+        // $this->call([
         //     \Database\Seeders\Master\RoleSeeder::class,
         //     \Database\Seeders\Master\UserSeeder::class,
         //     \Database\Seeders\Master\PengajarSeeder::class,
@@ -29,12 +29,12 @@ class DatabaseSeeder extends Seeder
         //     \Database\Seeders\Master\JenisPembayaranSeeder::class,
         //     \Database\Seeders\Master\KategoriInventarisSeeder::class,
         //     \Database\Seeders\Master\TahunAjaranSeeder::class,
-        ]);
+        // ]);
 
-        $this->command->info('');
-        $this->command->info('✅ STEP 1 Completed!');
-        $this->command->info('');
-        $this->command->info('🎉 All Master Data Seeded Successfully!');
+        // $this->command->info('');
+        // $this->command->info('✅ STEP 1 Completed!');
+        // $this->command->info('');
+        // $this->command->info('🎉 All Master Data Seeded Successfully!');
 
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             // \Database\Seeders\Academic\KelasSantriSeeder::class,
             // \Database\Seeders\Academic\PenghuniKamarSeeder::class,
             // \Database\Seeders\Academic\PengampuSeeder::class,
-            // \Database\Seeders\Academic\JadwalPelajaranSeeder::class,
+            \Database\Seeders\Academic\JadwalPelajaranSeeder::class,
         ]);
         $this->command->info('');
         $this->command->info('✅ STEP 2 Completed!');
@@ -62,24 +62,24 @@ class DatabaseSeeder extends Seeder
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
 
-        $this->command->info('🌱 Starting STEP 3: Operational Data Seeding...');
-        $this->command->info('');
+        // $this->command->info('🌱 Starting STEP 3: Operational Data Seeding...');
+        // $this->command->info('');
 
-        // STEP 3: Operational DATA
-        $this->command->info('📋 Seeding Operational Data...');
-        $this->call([
-            // \Database\Seeders\Operational\InventarisSeeder::class,
-            // \Database\Seeders\Operational\PerizinanSeeder::class,
-            // \Database\Seeders\Operational\PembayaranSeeder::class,
-            // \Database\Seeders\Operational\NilaiSeeder::class,
-            // \Database\Seeders\Operational\KehadiranSeeder::class,
-            // \Database\Seeders\Operational\RaporSeeder::class,
-            // \Database\Seeders\Operational\RaporSummarySeeder::class,
-        ]);
-        $this->command->info('');
-        $this->command->info('✅ STEP 3 Completed!');
-        $this->command->info('');
-        $this->command->info('🎉 All Operational Data Seeded Successfully!');
+        // // STEP 3: Operational DATA
+        // $this->command->info('📋 Seeding Operational Data...');
+        // $this->call([
+        //     \Database\Seeders\Operational\InventarisSeeder::class,
+        //     \Database\Seeders\Operational\PerizinanSeeder::class,
+        //     \Database\Seeders\Operational\PembayaranSeeder::class,
+        //     \Database\Seeders\Operational\NilaiSeeder::class,
+        //     \Database\Seeders\Operational\KehadiranSeeder::class,
+        //     \Database\Seeders\Operational\RaporSeeder::class,
+        //     \Database\Seeders\Operational\RaporSummarySeeder::class,
+        // ]);
+        // $this->command->info('');
+        // $this->command->info('✅ STEP 3 Completed!');
+        // $this->command->info('');
+        // $this->command->info('🎉 All Operational Data Seeded Successfully!');
 
     }
 }

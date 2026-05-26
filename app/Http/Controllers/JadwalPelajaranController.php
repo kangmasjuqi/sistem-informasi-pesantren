@@ -48,10 +48,13 @@ class JadwalPelajaranController extends Controller
             'pengampu.mataPelajaran',
             'pengajar',
         ])
+        ->join('pengampu', 'pengampu.id', '=', 'jadwal_pelajaran.pengampu_id')
         ->where('jadwal_pelajaran.kelas_id', $request->kelas_id)
-        ->whereHas('pengampu', fn($q) => $q->where('semester_id', $request->semester_id))
-        ->orderByRaw("FIELD(hari, 'senin','selasa','rabu','kamis','jumat','sabtu','minggu')")
-        ->orderBy('jam_mulai')
+        ->where('pengampu.semester_id', $request->semester_id)
+        ->whereNull('pengampu.deleted_at')  // respect soft deletes on pengampu
+        ->select('jadwal_pelajaran.*')       // avoid column ambiguity from join
+        ->orderByRaw("FIELD(jadwal_pelajaran.hari, 'senin','selasa','rabu','kamis','jumat','sabtu','minggu')")
+        ->orderBy('jadwal_pelajaran.jam_mulai')
         ->get();
 
         // Structure by hari
@@ -278,7 +281,7 @@ class JadwalPelajaranController extends Controller
     public function searchSemester(Request $request)
     {
         $results = Semester::where('nama', 'like', '%' . $request->get('q') . '%')
-            ->orderByDesc('nama')->limit(10)->get(['id', 'nama', 'is_active'])
+            ->orderByDesc('id')->limit(10)->get(['id', 'nama', 'is_active'])
             ->map(fn($s) => ['id' => $s->id, 'text' => $s->nama . ($s->is_active ? ' ★' : '')]);
 
         return response()->json(['results' => $results]);
