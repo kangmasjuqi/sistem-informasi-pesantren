@@ -22,6 +22,7 @@ use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PengampuController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\JadwalPelajaranController;
 
 /*
@@ -365,6 +366,21 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/search/pengampu',       [NilaiController::class, 'searchPengampu'])->name('search-pengampu');
         Route::get('/search/semester',       [NilaiController::class, 'searchSemester'])->name('search-semester');
         Route::get('/search/kelas',          [NilaiController::class, 'searchKelas'])->name('search-kelas');
+    });
+
+    Route::prefix('kehadiran')->name('kehadiran.')->group(function () {
+        Route::get('/',                      [KehadiranController::class, 'index'])->name('index');
+        Route::get('/grid',                  [KehadiranController::class, 'grid'])->name('grid');
+        Route::post('/batch',                [KehadiranController::class, 'batchSave'])->name('batch-save');
+        Route::get('/rekap',                 [KehadiranController::class, 'rekap'])->name('rekap');
+        Route::get('/today-schedule',        [KehadiranController::class, 'todaySchedule'])->name('today-schedule');
+        Route::get('/session',               [KehadiranController::class, 'session'])->name('session');
+        Route::delete('/{id}',              [KehadiranController::class, 'destroy'])->name('destroy');
+
+        // Select2 search endpoints
+        // Route::get('/search/pengampu',       [KehadiranController::class, 'searchPengampu'])->name('search-pengampu');
+        Route::get('/search/semester',       [KehadiranController::class, 'searchSemester'])->name('search-semester');
+        Route::get('/search/kelas',          [KehadiranController::class, 'searchKelas'])->name('search-kelas');
     });
 
     Route::prefix('jadwal-pelajaran')->name('jadwal-pelajaran.')->group(function () {
