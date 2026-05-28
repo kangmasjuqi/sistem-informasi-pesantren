@@ -152,6 +152,8 @@ class KehadiranController extends Controller
             'rows.*.keterangan'    => 'nullable|string|max:500',
         ]);
 
+        $user = auth()->user();
+
         try {
             DB::beginTransaction();
 
@@ -179,6 +181,7 @@ class KehadiranController extends Controller
                         'jadwal_pelajaran_id' => $jadwalId,
                         'status_kehadiran'    => $row['status'],
                         'waktu_absen'         => $waktu_absen,
+                        'created_by'          => $user->id,
                         'keterangan_kegiatan' => $keteranganKegiatan,
                         'keterangan'          => $row['keterangan'] ?? null,
                     ]

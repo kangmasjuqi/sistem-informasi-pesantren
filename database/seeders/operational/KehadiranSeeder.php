@@ -138,6 +138,7 @@ class KehadiranSeeder extends Seeder
                             'jenis_kehadiran' => 'pelajaran',
                             'status_kehadiran' => $status,
                             'waktu_absen' => $waktuAbsen,
+                            'created_by' => 1, // Assuming admin user with ID 1 is seeding data
                             'keterangan_kegiatan' => null,
                             'keterangan' => null,
                             'created_at' => Carbon::now(),

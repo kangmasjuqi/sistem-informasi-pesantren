@@ -17,6 +17,13 @@ return new class extends Migration
             $table->foreignId('santri_id')->constrained('santri')->onDelete('cascade');
             $table->foreignId('pengampu_id')->nullable()->constrained('pengampu')->onDelete('set null')->comment('Untuk kehadiran pelajaran, reference ke pengampu');
             $table->foreignId('jadwal_pelajaran_id')->nullable()->constrained('jadwal_pelajaran')->onDelete('set null')->comment('Jadwal spesifik jika ada');
+
+            $table->foreignId('created_by')
+                ->nullable()
+                ->constrained('users')
+                ->onDelete('set null')
+                ->comment('User yang melakukan absensi');
+                
             $table->enum('jenis_kehadiran', ['pelajaran', 'sholat', 'kegiatan'])->default('pelajaran');
             $table->enum('status_kehadiran', ['hadir', 'sakit', 'izin', 'alpa'])->default('hadir');
             $table->time('waktu_absen')->nullable();
@@ -29,6 +36,7 @@ return new class extends Migration
             $table->index('santri_id');
             $table->index('pengampu_id');
             $table->index('jadwal_pelajaran_id');
+            $table->index('created_by');
             $table->index('tanggal');
             $table->index('jenis_kehadiran');
             $table->index('status_kehadiran');

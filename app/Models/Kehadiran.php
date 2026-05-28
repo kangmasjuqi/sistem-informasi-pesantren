@@ -22,6 +22,7 @@ class Kehadiran extends Model
         'jenis_kehadiran',
         'status_kehadiran',
         'waktu_absen',
+        'created_by',
         'keterangan_kegiatan',
         'keterangan',
     ];
@@ -226,6 +227,7 @@ class Kehadiran extends Model
                     'jadwal_pelajaran_id' => $jadwalPelajaranId,
                     'status_kehadiran'    => $row['status_kehadiran'] ?? 'hadir',
                     'waktu_absen'         => $row['waktu_absen'] ?? null,
+                    'created_by'          => $row['created_by'] ?? null,
                     'keterangan_kegiatan' => $row['keterangan_kegiatan'] ?? null,
                     'keterangan'          => $row['keterangan'] ?? null,
                 ]
