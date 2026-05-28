@@ -178,14 +178,14 @@
 
     {{-- Pelajaran context --}}
     <div id="ctxPelajaran">
-        <div class="form-row" style="grid-template-columns: 1fr 3fr auto; align-items: end;">
+        <div class="form-row" style="grid-template-columns: 1fr 2fr 2fr; align-items: end;">
             <div>
                 <label class="form-label">Tanggal</label>
                 <input type="date" class="form-control" id="inputTanggal">
             </div>
             <div>
-                <label class="form-label">Mata Pelajaran <small class="text-muted">(jadwal hari ini)</small></label>
-                <select class="form-select" id="selPengampu" style="width:100%;"></select>
+                <label class="form-label">Kelas</label>
+                <select class="form-select" id="selPengampu"></select>
             </div>
             <div>
                 <button class="btn btn-primary" id="btnLoad" disabled>
@@ -392,7 +392,7 @@ $(document).ready(function () {
     // ── Select2: pengampu (pelajaran) — today's schedule ──────
     $('#selPengampu').select2({
         theme: 'bootstrap-5',
-        placeholder: 'Pilih mata pelajaran hari ini...',
+        placeholder: 'Pilih kelas hari ini...',
         allowClear: true,
         ajax: {
             url: '{{ route("kehadiran.today-schedule") }}',
@@ -414,7 +414,7 @@ $(document).ready(function () {
         $('#selPengampu').select2('destroy');
         $('#selPengampu').select2({
             theme: 'bootstrap-5',
-            placeholder: 'Pilih mata pelajaran hari ini...',
+            placeholder: 'Pilih kelas hari ini...',
             allowClear: true,
             ajax: {
                 url: '{{ route("kehadiran.today-schedule") }}',

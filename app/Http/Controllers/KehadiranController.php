@@ -161,6 +161,7 @@ class KehadiranController extends Controller
             $jadwalId            = $request->jadwal_pelajaran_id;
             $keteranganKegiatan  = $request->keterangan_kegiatan;
             $count               = 0;
+            $waktu_absen         = now()->format('H:i:s');
 
             foreach ($request->rows as $row) {
                 Kehadiran::updateOrCreate(
@@ -177,7 +178,7 @@ class KehadiranController extends Controller
                     [
                         'jadwal_pelajaran_id' => $jadwalId,
                         'status_kehadiran'    => $row['status'],
-                        'waktu_absen'         => $row['waktu_absen'] ?? null,
+                        'waktu_absen'         => $waktu_absen,
                         'keterangan_kegiatan' => $keteranganKegiatan,
                         'keterangan'          => $row['keterangan'] ?? null,
                     ]
@@ -290,7 +291,7 @@ class KehadiranController extends Controller
 
         $results = $query->orderBy('jam_mulai')->get()->map(fn($j) => [
             'id'          => $j->pengampu_id,
-            'text'        => "[{$j->kelas?->nama_kelas}] {$j->pengampu?->mataPelajaran?->nama} ({$j->waktu_label})",
+            'text'        => "[{$j->kelas?->nama_kelas}] {$j->kelas?->deskripsi}", // {$j->pengampu?->mataPelajaran?->nama_mapel} ({$j->waktu_label})",
             'kelas_id'    => $j->kelas_id,
             'jam_mulai'   => substr($j->jam_mulai, 0, 5),
             'jam_selesai' => substr($j->jam_selesai, 0, 5),
