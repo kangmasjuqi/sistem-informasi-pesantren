@@ -149,6 +149,7 @@ $(document).ready(function () {
         const id = $('#pengajarId').val();
         const formData = new FormData(this);
         if (id) formData.append('_method', 'PUT');
+        formData.append('_token', csrfToken);
         showLoading();
         $.ajax({
             url: id ? `/pengajar/${id}` : '/pengajar',

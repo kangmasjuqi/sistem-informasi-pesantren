@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Models\Role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class PengajarController extends Controller
 {
@@ -112,7 +116,28 @@ class PengajarController extends Controller
                 $fotoPath = $request->file('foto')->store('pengajar/foto', 'public');
             }
 
-            $user_id = 0; // TODO create User first 
+            DB::beginTransaction();
+
+            $username = strtolower(str_replace(' ', '', $request->nama_lengkap)) . rand(100, 999);
+
+            $user = User::create([
+                'name'         => $request->nama_lengkap,
+                'nama_lengkap' => $request->nama_lengkap,
+                'email'        => $request->email,
+                'username'     => $request->username ?? $username,
+                'password'     => Hash::make($request->password ?? Str::random(12)),
+                'telepon'      => $request->telepon,
+                'alamat'       => $request->alamat_lengkap,
+                'status'       => $request->status === 'aktif' ? 'aktif' : 'tidak_aktif',
+            ]);
+
+            // Attach "Pengajar" role (adjust role lookup to match your roles table data)
+            $pengajarRole = Role::where('kode', 'PENGAJAR')->first();
+            if ($pengajarRole) {
+                $user->roles()->attach($pengajarRole->id);
+            }
+
+            $user_id = $user->id;
 
             $pengajar = Pengajar::create([
                 'user_id'             => $user_id,
@@ -140,8 +165,11 @@ class PengajarController extends Controller
                 'keterangan'          => $request->keterangan,
             ]);
 
+            DB::commit();
+
             return response()->json(['success' => true, 'message' => 'Pengajar berhasil ditambahkan', 'data' => $pengajar]);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
         }
     }

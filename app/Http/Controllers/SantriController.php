@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Models\User;
+use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class SantriController extends Controller
 {
@@ -59,9 +63,9 @@ class SantriController extends Controller
         // if (!empty($request->nis)) {
         //     $query->where('nis', 'like', "%{$request->nis}%");
         // }
-        // if (!empty($request->nama_lengkap)) {
-        //     $query->where('nama_lengkap', 'like', "%{$request->nama_lengkap}%");
-        // }
+        if (!empty($request->nama_lengkap)) {
+            $query->where('nama_lengkap', 'like', "%{$request->nama_lengkap}%");
+        }
         // if (!empty($request->jenis_kelamin)) {
         //     $query->where('jenis_kelamin', $request->jenis_kelamin);
         // }
@@ -137,7 +141,28 @@ class SantriController extends Controller
                 $fotoPath = $request->file('foto')->store('santri/foto', 'public');
             }
 
-            $user_id = 0; // TODO create User first 
+            DB::beginTransaction();
+
+            $username = strtolower(str_replace(' ', '', $request->nama_lengkap)) . rand(100, 999);
+
+            $user = User::create([
+                'name'         => $request->nama_lengkap,
+                'nama_lengkap' => $request->nama_lengkap,
+                'email'        => $request->email ?? Str::slug($request->nama_lengkap) . rand(100, 999) . '@example.com',
+                'username'     => $request->username ?? $username,
+                'password'     => Hash::make($request->password ?? Str::random(12)),
+                'telepon'      => $request->telepon,
+                'alamat'       => $request->alamat_lengkap,
+                'status'       => 'aktif',
+            ]);
+
+            // Attach "Santri" role (adjust kode to match your roles table data)
+            $santriRole = Role::where('kode', 'SANTRI')->first();
+            if ($santriRole) {
+                $user->roles()->attach($santriRole->id);
+            }
+
+            $user_id = $user->id;
 
             $santri = Santri::create([
                 'user_id'         => $user_id,
@@ -167,8 +192,11 @@ class SantriController extends Controller
                 'keterangan'      => $request->keterangan,
             ]);
 
+            DB::commit();
+
             return response()->json(['success' => true, 'message' => 'Santri berhasil ditambahkan', 'data' => $santri]);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
         }
     }
