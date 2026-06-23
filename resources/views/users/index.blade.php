@@ -262,7 +262,18 @@ $(document).ready(function() {
                 {
                     data: 'id',
                     orderable: false,
-                    render: function(data) {
+                    render: function(data, type, row) {
+                        const allowedRoles = ['SUPERADMIN', 'ADMIN'];
+                        const canResetPassword = row.roles && row.roles.some(role => allowedRoles.includes(role));
+
+                        const resetPasswordBtn = canResetPassword ? `
+                            <button class="btn btn-sm btn-warning btn-reset-password" data-id="${data}" data-name="${row.nama_lengkap}" title="Reset Password">
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                </svg>
+                            </button>
+                        ` : '';
+
                         return `
                             <div style="display: flex; gap: 0.25rem; flex-wrap: wrap;">
                                 <button class="btn btn-sm btn-primary btn-edit" data-id="${data}" title="Edit">
@@ -271,6 +282,7 @@ $(document).ready(function() {
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                 </button>
+                                ${resetPasswordBtn}
                             </div>
                         `;
                     }
@@ -350,9 +362,48 @@ $(document).ready(function() {
             title: 'Reset Password',
             html: `
                 <p>Reset password untuk: <strong>${name}</strong></p>
-                <input type="password" id="swal-password" class="swal2-input" placeholder="Password baru (min. 8 karakter)">
-                <input type="password" id="swal-password-confirm" class="swal2-input" placeholder="Konfirmasi password">
+
+                <div class="swal-password-wrapper" style="position: relative; margin-bottom: 0.75rem;">
+                    <input type="password" id="swal-password" class="swal2-input" style="margin: 0; padding-right: 2.5rem;" placeholder="Password baru (min. 8 karakter)">
+                    <button type="button" id="swal-toggle-password" class="swal-eye-btn" data-target="swal-password" title="Tampilkan password">
+                        👁️
+                    </button>
+                </div>
+
+                <div class="swal-password-wrapper" style="position: relative; margin-bottom: 0.75rem;">
+                    <input type="password" id="swal-password-confirm" class="swal2-input" style="margin: 0; padding-right: 2.5rem;" placeholder="Konfirmasi password">
+                    <button type="button" id="swal-toggle-password-confirm" class="swal-eye-btn" data-target="swal-password-confirm" title="Tampilkan password">
+                        👁️
+                    </button>
+                </div>
+
+                <button type="button" id="swal-generate-password" class="btn btn-sm btn-warning" style="margin-top: 0.25rem;">
+                    Generate Password
+                </button>
             `,
+            didOpen: () => {
+                // Toggle show/hide for both fields
+                document.querySelectorAll('.swal-eye-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const targetId = btn.getAttribute('data-target');
+                        const input = document.getElementById(targetId);
+                        const isPassword = input.type === 'password';
+                        input.type = isPassword ? 'text' : 'password';
+                        btn.style.opacity = isPassword ? 1 : 0.5;
+                    });
+                });
+
+                // Generate random password into both fields
+                document.getElementById('swal-generate-password').addEventListener('click', () => {
+                    const generated = generateRandomPassword(8);
+                    const passwordInput = document.getElementById('swal-password');
+                    const confirmInput = document.getElementById('swal-password-confirm');
+                    passwordInput.type = 'text';
+                    confirmInput.type = 'text';
+                    passwordInput.value = generated;
+                    confirmInput.value = generated;
+                });
+            },
             showCancelButton: true,
             confirmButtonText: 'Reset Password',
             cancelButtonText: 'Batal',
@@ -365,17 +416,17 @@ $(document).ready(function() {
                     Swal.showValidationMessage('Password dan konfirmasi harus diisi');
                     return false;
                 }
-                
+
                 if (password.length < 8) {
                     Swal.showValidationMessage('Password minimal 8 karakter');
                     return false;
                 }
-                
+
                 if (password !== passwordConfirm) {
                     Swal.showValidationMessage('Password dan konfirmasi tidak cocok');
                     return false;
                 }
-                
+
                 return { password, password_confirmation: passwordConfirm };
             }
         }).then((result) => {
@@ -401,6 +452,18 @@ $(document).ready(function() {
                 });
             }
         });
+    }
+
+    function generateRandomPassword(length = 8) {
+        const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';
+        const randomValues = new Uint32Array(length);
+        window.crypto.getRandomValues(randomValues);
+
+        let password = '';
+        for (let i = 0; i < length; i++) {
+            password += charset[randomValues[i] % charset.length];
+        }
+        return password;
     }
 
     function resetForm() {

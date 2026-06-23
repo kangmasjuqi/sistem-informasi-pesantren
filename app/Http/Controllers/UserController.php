@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -321,11 +322,13 @@ class UserController extends Controller
      */
     public function resetPassword(Request $request, $id)
     {
+        $authUser = Auth::user();
+
         $validator = Validator::make($request->all(), [
             'password' => 'required|string|min:8|confirmed',
         ], [
-            'password.required' => 'Password harus diisi',
-            'password.min' => 'Password minimal 8 karakter',
+            'password.required'  => 'Password harus diisi',
+            'password.min'       => 'Password minimal 8 karakter',
             'password.confirmed' => 'Konfirmasi password tidak cocok',
         ]);
 
@@ -338,9 +341,19 @@ class UserController extends Controller
         }
 
         try {
-            $user = User::findOrFail($id);
-            
-            $user->update([
+            $targetUser = User::findOrFail($id);
+
+            $allowedRoles = ['SUPERADMIN', 'ADMIN'];
+            $targetRoleKodes = $targetUser->roles()->pluck('kode')->toArray();
+
+            if (empty(array_intersect($allowedRoles, $targetRoleKodes))) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Reset password hanya diperbolehkan untuk role SUPERADMIN atau ADMIN'
+                ], 403);
+            }
+
+            $targetUser->update([
                 'password' => Hash::make($request->password)
             ]);
 
@@ -352,7 +365,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                'message' => 'Terjadi kesalahan saat reset password'
             ], 500);
         }
     }
